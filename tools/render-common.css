@@ -1,0 +1,28 @@
+/* Shared by the render sources in tools/: og, banner, avatar. Tokens mirror assets/supportgenius.css. */
+* { box-sizing: border-box; }
+:root { --bg:#0a0c10; --card:#0f1216; --raised:#171b21; --ink:#e7eaef; --soft:#aeb6c3; --dim:#9aa3b2; --mute:#7b8394; --acc:#5b9dff; --warn:#ffc85c; --ok:#3ddc97; }
+html, body { margin: 0; padding: 0; background: var(--bg); overflow: hidden; }
+body { color: var(--ink); font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.frame { position: relative; overflow: hidden; background: var(--bg); }
+.glow { position: absolute; inset: 0; background: radial-gradient(55% 60% at 72% 42%, rgba(91,157,255,.20), transparent 70%); }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(60% 70% at 70% 45%, #000, transparent); }
+.brand { display: flex; align-items: center; gap: 14px; font-weight: 600; letter-spacing: -.01em; }
+.brand b { color: var(--acc); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 10px; font-family: "Geist Mono", monospace; letter-spacing: .06em; color: var(--warn); border: 1.5px solid rgba(255,200,92,.5); border-radius: 8px; }
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--warn); }
+h1 { margin: 0; font-weight: 600; letter-spacing: -.04em; }
+h1 span { color: var(--dim); }
+.mono { font-family: "Geist Mono", monospace; }
+/* the frozen routing graphic: a message, the engine, three destinations */
+.route { position: absolute; }
+.bub { position: absolute; background: var(--acc); color: var(--bg); border-radius: 16px 16px 4px 16px; font-weight: 500; line-height: 1.35; }
+.core { position: absolute; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #1a1f27, #0a0c10); display: grid; place-items: center; box-shadow: 0 0 0 20px rgba(91,157,255,.12), 0 0 70px rgba(91,157,255,.45), inset 0 0 0 1.5px var(--acc); }
+.core i { border-radius: 50%; border: 1.5px dashed rgba(91,157,255,.75); display: grid; place-items: center; }
+.core i::before { content: ""; border-radius: 22%; background: var(--acc); box-shadow: 0 0 26px var(--acc); }
+.dest { position: absolute; display: flex; align-items: center; background: var(--card); border: 1.5px solid rgba(255,255,255,.1); border-radius: 14px; }
+.dest.hot { border-color: var(--acc); background: #111a29; box-shadow: 0 0 40px rgba(91,157,255,.25); }
+.dest .t { font-weight: 500; }
+.dest .s { font-family: "Geist Mono", monospace; color: var(--dim); white-space: nowrap; }
+.dest .k { flex: none; border-radius: 10px; background: var(--raised); display: grid; place-items: center; font-family: "Geist Mono", monospace; color: var(--soft); }
+.lines path { fill: none; stroke: rgba(255,255,255,.16); stroke-width: 2; }
+.lines path.hot { stroke: var(--acc); stroke-width: 2.5; }

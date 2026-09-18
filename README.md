@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="assets/readme-banner.png" alt="SupportGenius. Support that answers. When it can't, it routes the issue to the right people. In design, nothing is built yet." width="100%">
+</p>
+
+<p align="center">
   <b>supportgeni.us</b> · a <a href="https://factory0.ventures">Factory Zero</a> venture
 </p>
 
@@ -71,13 +75,18 @@ and `.well-known/security.txt`.
 ├── assets/
 │   ├── supportgenius.css      the whole design system, tokens at the top
 │   ├── supportgenius.js       demo stage scale, reduced motion for its SVG, the waitlist
-│   └── favicon.svg            the mark, still
+│   ├── favicon.svg            the mark, still
+│   ├── og.png                 Open Graph card (1200×630)
+│   ├── apple-touch-icon.png  icon-512.png
+│   ├── org-avatar.png         GitHub organisation avatar, uploaded by hand; not deployed
+│   └── readme-banner.png      the banner above, also the org profile's; not deployed
 ├── llms.txt                   the structured summary for machine readers
 ├── robots.txt                 AI crawlers welcomed by name
 ├── _headers  _redirects       Cloudflare Pages
 ├── COPY.md                    every claim on the page, with its source
 └── tools/
     ├── check.py               structure + house-rule checks; deploy.sh runs it
+    ├── render-og.sh           renders every PNG above with headless Chrome, from *-render.html
     ├── build-dist.sh          assembles dist/ from an allowlist, stamps cache hashes
     └── deploy.sh              deploys origin/main from a clean worktree
 ```
@@ -95,6 +104,19 @@ python3 tools/check.py          # before every commit
 `_headers` (including the Content-Security-Policy) only applies on Cloudflare
 Pages. A local server does not send it, so check a change that loads anything
 new on a Pages preview too.
+
+## Images
+
+`tools/render-og.sh` renders `og.png`, `readme-banner.png`, `org-avatar.png` and
+the two app icons from `tools/og-render.html`, `tools/banner-render.html`,
+`tools/avatar-render.html` and `assets/favicon.svg`, with headless Chrome. The
+same shape as colonizer.dev. The images carry the "in design" chip, and no
+third-party logos, because an image travels without the page's trademark line.
+
+`readme-banner.png` is also the banner of the organisation profile in
+`SupportGenius/.github`: copy it there when it changes. GitHub has no API for
+organisation avatars, so `org-avatar.png` is uploaded by hand at
+`github.com/organizations/SupportGenius/settings/profile`.
 
 ## The demo stage
 
