@@ -1,0 +1,12 @@
+{
+  "name": "SupportGenius",
+  "short_name": "SupportGenius",
+  "description": "Support that answers. When it can't, it routes the issue to the right people.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0c10",
+  "theme_color": "#0a0c10",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

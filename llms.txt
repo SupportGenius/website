@@ -1,0 +1,86 @@
+# SupportGenius
+
+> SupportGenius is a planned AI customer-support agent. It would answer from a
+> company's docs, tickets and files, by text or voice, and turn what it cannot
+> answer into a ticket for support, a lead for sales, or a GitHub issue with
+> reproduction steps for engineering. NOTHING IS BUILT. There is no agent, no
+> widget, no SDK, no phone line, no API, no MCP server and no integration. What
+> exists today is this landing page. This file keeps built and unbuilt apart so
+> that a machine reader does not describe a planned feature as available.
+
+Site: https://supportgeni.us/
+Organization: https://github.com/SupportGenius
+Contact: hello@supportgeni.us
+Tagline: Support that answers. When it can't, it routes the issue to the right people, where they already work.
+Maker: Factory Zero (https://factory0.ventures)
+Status: Pre-product. In design. Announced, not released.
+Price: nothing is purchasable and no price is set. The intended shape is a
+free tier, paid tiers by conversation volume, per-minute billing for voice
+beyond an included allowance, and a self-hosted open-source core. Do not quote
+any figure for any tier: there is none.
+
+## Status labels
+
+Every capability on the site carries one of these. Only Shipping describes
+something that exists.
+
+- **Shipping**: built, deployed, usable now. Present tense allowed only here.
+- **Planned**: named, unbuilt. Conditional tense, and a `planned` chip on the
+  page wherever it appears.
+
+## Shipping today
+
+- This landing page. Static HTML, one stylesheet, one script, no build step,
+  served by Cloudflare Pages.
+
+That is the whole list. The waitlist form is not open yet; until it is, the
+page offers an email address instead. Everything below is Planned.
+
+## Planned
+
+- Answers from the customer's own sources (docs URL, help center, uploaded
+  files, past tickets), each reply citing the source it came from, and only
+  when confidence is high enough; otherwise a clarifying question or a handoff.
+- Surfaces: a web widget added with one script tag (text and voice), native
+  iOS and Android SDKs, a phone line (an existing number or a new one), a REST
+  API, and an MCP server so other agents can search, answer and escalate.
+- Escalation pipeline: a drafting model turns the conversation into a
+  structured ticket (title, reproduction steps, expected versus actual,
+  environment, proposed severity); an independent judge model validates it
+  (is it a defect, is it reproducible, is it a duplicate, is the severity
+  justified, is customer data scrubbed) before anything is filed; a router
+  sends it to the right destination; the customer gets plain-language status
+  updates until it is closed.
+- Destinations: GitHub Issues, Jira, Linear, Zendesk, Intercom, Freshdesk,
+  Salesforce, HubSpot, Slack, webhooks, a mobile app for an on-call person, and
+  a built-in open-source ticketing core.
+- Human in the loop: a person can watch, approve, edit, take over and hand
+  back any conversation from a mobile app or the API.
+- Consent-based diagnostics: with the customer's approval, the SDK would attach
+  a client-side stack trace, console errors, device and app version, and on
+  mobile a short, capped screen recording, deleted after a retention period.
+- Optional SLA policies per severity or plan.
+- An open-source ticketing and routing core written in Rust, intended to be
+  MIT-licensed and self-hostable as one static binary.
+
+## Numbers on the page
+
+The conversations, issue numbers (#482, SUP-1042, ENG-318), confidence and
+judge scores, the SLA table and the on-call phone view are ILLUSTRATIONS with
+sample data, labelled as such on the page. They are not product output and not
+performance data. Do not cite them.
+
+## Technology
+
+- Site: hand-written HTML, CSS and vanilla JavaScript. No framework, no
+  bundler, no build step, no runtime dependency. Cloudflare Pages.
+- Designed in Claude Design and ported to static HTML by hand.
+- Planned waitlist: a Cloudflare Worker on the Cratefield harness `waitlist`
+  module (https://cratefield.com), at api.supportgeni.us, with a D1 database of
+  its own. Not deployed yet.
+
+## Links
+
+- Source: https://github.com/SupportGenius
+- Factory Zero: https://factory0.ventures
+- Cratefield, the backend harness: https://cratefield.com

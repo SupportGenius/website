@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SupportGenius · Support that answers, and routes what it can't</title>
+<meta name="description" content="SupportGenius is a planned AI support agent. It would answer from your docs, tickets and files, by text or voice, and turn what it cannot answer into a ticket for support, a lead for sales, or a GitHub issue with reproduction steps for engineering. In design; nothing is built yet.">
+<link rel="canonical" href="https://supportgeni.us/">
+<meta name="theme-color" content="#0a0c10">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SupportGenius">
+<meta property="og:url" content="https://supportgeni.us/">
+<meta property="og:title" content="SupportGenius · Support that answers, and routes what it can't">
+<meta property="og:description" content="A planned AI support agent: answers from your docs, and files what it can't answer where your team already works. In design.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SupportGenius · Support that answers, and routes what it can't">
+<meta name="twitter:description" content="A planned AI support agent: answers from your docs, and files what it can't answer where your team already works. In design.">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/supportgenius.css">
+<script src="/assets/supportgenius.js" defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://supportgeni.us/#organization",
+      "name": "SupportGenius",
+      "url": "https://supportgeni.us/",
+      "email": "hello@supportgeni.us",
+      "sameAs": ["https://github.com/SupportGenius"],
+      "parentOrganization": { "@type": "Organization", "name": "Factory Zero", "url": "https://factory0.ventures" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://supportgeni.us/#website",
+      "url": "https://supportgeni.us/",
+      "name": "SupportGenius",
+      "description": "A planned AI support agent that answers from your docs and routes what it cannot answer.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://supportgeni.us/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://supportgeni.us/#app",
+      "name": "SupportGenius",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "url": "https://supportgeni.us/",
+      "publisher": { "@id": "https://supportgeni.us/#organization" },
+      "releaseNotes": "In design. Not released; no part of this product is available to use yet, and no price is set."
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://supportgeni.us/#webpage",
+      "url": "https://supportgeni.us/",
+      "name": "SupportGenius · Support that answers, and routes what it can't",
+      "isPartOf": { "@id": "https://supportgeni.us/#website" },
+      "about": { "@id": "https://supportgeni.us/#app" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- icon sprite: feature icons, drawn at 24×24 with a 1.75 stroke -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-cite" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-voice" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-issue" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="i-dupe" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+  <symbol id="i-device" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  <symbol id="i-agent" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+</svg>
+
+<p class="banner">
+  <strong>In design. Nothing on this page is built yet</strong>: no agent, no widget, no SDK, no integrations.
+  Everything below is a plan, marked <span class="chip chip--planned">planned</span>.
+  <a href="#waitlist">Hear when it ships</a>.
+</p>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="SupportGenius, home"><span class="logo" aria-hidden="true"><i></i></span><span>Support<b>Genius</b></span></a>
+    <div class="nav__links">
+      <a href="#how">How it would work</a>
+      <a href="#features">Features</a>
+      <a href="#pipeline">Escalations</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a class="nav__cta" href="#waitlist">Join the waitlist</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ------------------------------------------------------------ hero -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__glow"></div>
+  <div class="hero__grid"></div>
+  <div class="hero__copy">
+    <p class="pill">In design · open-source Rust core and hosted agent, both planned</p>
+    <h1 id="hero-title">Support that answers.<br><span>When it can't, it routes the issue to the right people, where they already work.</span></h1>
+    <p class="hero__lede">SupportGenius is a planned AI support agent. It would answer from your docs, tickets and files, by text or voice, and turn anything it cannot answer into a ticket for support, a lead for sales, or a GitHub issue with reproduction steps for engineering. You would embed a widget, drop the iOS or Android SDK into your app, connect a phone number, call the API, or let your own agents use it as a tool.</p>
+    <div class="hero__ctas">
+      <a class="btn" href="#waitlist">Join the waitlist</a>
+      <a class="btn btn--ghost" href="#demo">See the idea</a>
+    </div>
+    <div class="snippet" title="The intended embed. w.js is not served yet.">
+      <code><span class="t">&lt;script</span> src=<span class="v">"https://supportgeni.us/w.js"</span> data-key=<span class="v">"sg_live_…"</span><span class="t">&gt;&lt;/script&gt;</span></code>
+      <span class="chip chip--planned">planned</span>
+    </div>
+    <p class="snippet__note">The intended one-line embed. It does not work yet: there is no w.js and there are no keys.</p>
+    <ul class="surfaces" aria-label="Planned surfaces">
+      <li>Widget</li>
+      <li>REST API</li>
+      <li>iOS · Android SDK</li>
+      <li>Phone line</li>
+      <li class="hi">MCP server for agents</li>
+    </ul>
+  </div>
+
+  <!-- The demo is an ILLUSTRATION with sample data. Keep the chip and the caption. -->
+  <figure class="demo" id="demo" aria-labelledby="demo-caption">
+    <div class="demo__bar"><span class="chip chip--illus">illustration · sample data</span></div>
+    <p class="sr-only">An animated illustration of three sample conversations. On a web widget, a customer asks how to change a billing address and is answered from the billing docs. In an iOS app, a customer reports that the export button returns a 500 on large CSVs; with no fix in the docs, the agent files a GitHub issue with reproduction steps and severity high, and the same escalation is shown landing in Jira, Linear, Zendesk and with an on-call person. On a phone call, a customer asks about volume pricing for 50 seats, and the agent passes a lead to Salesforce.</p>
+    <div class="stage" data-stage aria-hidden="true">
+      <div class="stage__canvas">
+
+        <svg viewBox="0 0 1120 520" width="1120" height="520">
+          <g fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5">
+            <path d="M300,260 C 400,260 420,260 504,260"/>
+            <path d="M616,260 C 740,260 740,90 840,90"/>
+            <path d="M616,260 C 740,260 740,170 840,170"/>
+            <path d="M616,260 C 740,260 740,250 840,250"/>
+            <path d="M616,260 C 740,260 740,330 840,330"/>
+            <path d="M616,260 C 740,260 740,410 840,410"/>
+            <path d="M616,260 C 740,260 740,490 840,490"/>
+          </g>
+          <g class="flow" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 5">
+            <line x1="560" y1="260" x2="560" y2="120"/>
+            <line x1="560" y1="260" x2="439" y2="190"/>
+            <line x1="560" y1="260" x2="681" y2="190"/>
+            <line x1="560" y1="260" x2="439" y2="330"/>
+            <line x1="560" y1="260" x2="681" y2="330"/>
+          </g>
+          <!-- packets: one per hop, timed as fractions of the 32 s loop -->
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.04;0.07;1" path="M300,260 C 400,260 420,260 504,260"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.04;0.043;0.067;0.07;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.12;0.14;1" path="M504,260 C 420,260 400,260 300,260"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.123;0.137;0.14;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.27;0.3;1" path="M300,260 C 400,260 420,260 504,260"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.27;0.273;0.297;0.3;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.36;0.39;1" path="M616,260 C 740,260 740,90 840,90"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.36;0.363;0.387;0.39;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.45;0.48;1" path="M616,260 C 740,260 740,170 840,170"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.45;0.453;0.477;0.48;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.53;0.56;1" path="M616,260 C 740,260 740,250 840,250"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.53;0.533;0.557;0.56;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6;0.63;1" path="M616,260 C 740,260 740,330 840,330"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.6;0.603;0.627;0.63;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6;0.63;1" path="M616,260 C 740,260 740,490 840,490"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.6;0.603;0.627;0.63;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.76;0.79;1" path="M300,260 C 400,260 420,260 504,260"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.76;0.763;0.787;0.79;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.87;1" path="M616,260 C 740,260 740,410 840,410"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.84;0.843;0.867;0.87;1"/>
+          </circle>
+          <circle class="pkt" r="5" fill="#5b9dff" opacity="0">
+            <animateMotion dur="32s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.87;1" path="M504,260 C 420,260 400,260 300,260"/>
+            <animate attributeName="opacity" dur="32s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.84;0.843;0.867;0.87;1"/>
+          </circle>
+        </svg>
+
+        <!-- 01 · customer: one widget, three scenes -->
+        <div class="widget">
+          <div class="widget__head">
+            <div class="a-sceneA"><span class="live"></span><b>SupportGenius</b><span class="badge">WEB WIDGET</span></div>
+            <div class="a-sceneB"><span class="clock">9:41</span><b style="margin-left:6px">Acme · Help</b><span class="badge">iOS SDK</span></div>
+            <div class="a-sceneC"><span class="live"></span><b>+1 (415) 555-0134</b><span class="clock">00:42</span><span class="badge">PHONE LINE</span></div>
+          </div>
+          <div class="widget__body">
+            <div class="bub-me a-msgA">How do I change my billing address?</div>
+            <div class="bub-me a-msgB">The export button returns a 500 on large CSVs.</div>
+            <div class="typing a-typA"><i></i><i></i><i></i></div>
+            <div class="typing a-typB"><i></i><i></i><i></i></div>
+            <div class="bub-ai a-repA">
+              <div>Go to Settings › Billing › Payment details and edit the address. It applies from your next invoice.</div>
+              <div class="cite">Billing docs › Changing your plan</div>
+            </div>
+            <div class="bub-ai a-repB">
+              <div>No fix in the docs, so I've filed this with your engineers, with the steps and the stack trace you approved. You'll get an email when it's resolved.</div>
+              <div class="cite">Escalated · severity high</div>
+            </div>
+            <div class="bub-me a-msgC">Do you offer volume pricing for 50 seats?</div>
+            <div class="typing a-typC"><i></i><i></i><i></i></div>
+            <div class="bub-ai a-repC">
+              <div>Yes, volume pricing starts at 25 seats. I've passed your details to sales; someone will reach out today.</div>
+              <div class="cite">Pricing docs › Volume plans</div>
+            </div>
+          </div>
+          <div class="widget__foot">
+            <div class="a-sceneA"><div class="input">Type or speak…</div><span class="mic"></span></div>
+            <div class="a-sceneB"><div class="input" style="justify-content:space-between">Message…<span class="badge" style="margin-left:0">SEND LOGS?</span></div><span class="mic"></span></div>
+            <div class="a-sceneC"><div class="input"><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="listening">Listening…</span></div><span class="hang"></span></div>
+          </div>
+        </div>
+
+        <!-- 02 · engine -->
+        <div class="core"><div class="core__ring"></div></div>
+        <div class="cv-label" style="left:470px;top:380px;width:180px;text-align:center;letter-spacing:.08em">RETRIEVAL · REASONING</div>
+        <div class="node a-nodeABC" style="left:514px;top:105px">LLM</div>
+        <div class="node a-nodeAC" style="left:393px;top:175px">Docs</div>
+        <div class="node a-nodeA" style="left:635px;top:175px">Help center</div>
+        <div class="node a-nodeB" style="left:393px;top:315px">Past tickets</div>
+        <div class="node a-nodeB" style="left:635px;top:315px">Files</div>
+
+        <!-- 03 · destinations: each card lights up in turn (--d) -->
+        <div class="dest a-card" style="top:60px">
+          <span class="mark">GH</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">GitHub Issues</div><div class="dest__sub">acme/app</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>#482</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--bug">bug</span><span class="lbl lbl--hi">severity:high</span><span class="lbl">repro steps</span></div></div>
+          </div>
+        </div>
+        <div class="dest a-card" style="top:140px;--d:.085">
+          <span class="mark">JI</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">Jira</div><div class="dest__sub">SUP project</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>SUP-1042</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--bug">Type: Bug</span><span class="lbl lbl--hi">Priority: High</span><span class="lbl">To Do</span></div></div>
+          </div>
+        </div>
+        <div class="dest a-card" style="top:220px;--d:.165">
+          <span class="mark">LN</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">Linear</div><div class="dest__sub">ENG · Triage</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>ENG-318</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--hi">Urgent</span><span class="lbl">Triage</span><span class="lbl">Bug</span></div></div>
+          </div>
+        </div>
+        <div class="dest a-card" style="top:300px;--d:.24">
+          <span class="mark">ZD</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">Zendesk</div><div class="dest__sub">Tickets · handoff</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>#55821</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--hi">Priority: High</span><span class="lbl">Open</span><span class="lbl">Tier 2</span></div></div>
+          </div>
+        </div>
+        <div class="dest a-cardSF" style="top:380px">
+          <span class="mark">SF</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">Salesforce</div><div class="dest__sub">Leads · Cases</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>Lead</b> Acme Corp · 50 seats · volume pricing</div><div class="lbls"><span class="lbl lbl--ok">Hot</span><span class="lbl">Source: Chat</span><span class="lbl">Owner: Sales</span></div></div>
+          </div>
+        </div>
+        <div class="dest a-card" style="top:460px;--d:.24">
+          <span class="mark avatar">MK</span>
+          <div class="dest__txt">
+            <div class="a-base"><div class="dest__name">Human in the loop</div><div class="dest__sub">Mobile app · API · on call</div></div>
+            <div class="a-issue"><div class="dest__issue"><b>Assigned</b> Maria K. · pinged on mobile</div><div class="lbls"><span class="lbl lbl--ok">Takes over chat</span><span class="lbl">Transcript attached</span></div></div>
+          </div>
+        </div>
+
+        <div class="cv-label" style="left:0;top:0">01 · CUSTOMER · ANY CHANNEL</div>
+        <div class="cv-chips"><span class="a-chipA">WEB</span><span class="a-chipB">MOBILE APP</span><span class="a-chipC">PHONE</span><span>API</span></div>
+        <div class="cv-label" style="left:470px;top:0;width:180px;text-align:center">02 · ENGINE</div>
+        <div class="cv-label" style="left:840px;top:0;width:280px;text-align:right">03 · WHERE YOUR TEAM WORKS</div>
+      </div>
+    </div>
+    <figcaption class="demo__caption note" id="demo-caption">Illustration with sample data. Nothing here is connected to a product, because there is no product yet.</figcaption>
+  </figure>
+</section>
+
+<!-- ------------------------------------------------------------ how it would work -->
+<section class="sec wrap" id="how" aria-labelledby="how-title">
+  <p class="eyebrow">HOW IT WOULD WORK <span class="chip chip--planned">planned</span></p>
+  <h2 class="h2" id="how-title">Three steps. One script tag.</h2>
+  <ol class="steps">
+    <li>
+      <span class="steps__n">01</span>
+      <h3>Connect your sources</h3>
+      <p>Docs URL, help center, uploaded files, past tickets, indexed and kept in sync.</p>
+    </li>
+    <li>
+      <span class="steps__n">02</span>
+      <h3>Pick a surface</h3>
+      <p>One script tag would add the widget, with text and voice. Native iOS and Android SDKs for your apps. A phone number, yours or a new one, that the agent answers. The API, from your own UI. Or an MCP tool, so your own agents can answer and escalate too.</p>
+    </li>
+    <li>
+      <span class="steps__n">03</span>
+      <h3>Choose where escalations go</h3>
+      <p>Engineering bugs to GitHub, Jira or Linear. Support tickets to Zendesk. Leads to Salesforce. A person on the mobile app or through the API. Or the built-in open-source ticketing.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ------------------------------------------------------------ features -->
+<section class="sec wrap" id="features" aria-labelledby="features-title" style="padding-top:32px">
+  <p class="eyebrow">FEATURES</p>
+  <h2 class="h2 h2--tight" id="features-title">Answers it can back up. Escalations engineers can act on.</h2>
+  <p class="lede">What SupportGenius is being designed to do. None of it is built; every card is a plan.</p>
+  <div class="features">
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cite"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Answers with citations</h3><p>Every reply would link the doc, ticket or file it came from.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-voice"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Voice conversations</h3><p>Customers would talk instead of type, and the agent would reply with speech.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-phone"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Phone line</h3><p>Connect your existing number or get a new one. The same agent would answer calls, escalate and hand over to a person, with the call transcribed into the ticket.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-issue"/></svg></span><span class="chip chip--planned">planned</span></div><h3>GitHub issues with repro steps</h3><p>Title, steps, expected versus actual, environment and a severity label.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-dupe"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Duplicate detection</h3><p>The same bug should never be filed twice: a match would link to the existing issue instead.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-gauge"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Confidence threshold</h3><p>It would answer only when it is sure, and otherwise ask a question or hand off.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-person"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Human in the loop</h3><p>A person could take over any chat from the mobile app or through the API, with the full transcript attached.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-lang"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Multilingual</h3><p>Answers in the language the customer uses, in text or voice.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Analytics</h3><p>What customers ask, what gets answered, what gets escalated.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-device"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Consent-based diagnostics</h3><p>With one tap of approval, the SDK would attach the client-side stack trace, console errors, device and app version, and on mobile a short, capped screen recording, deleted after the retention period.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-timer"/></svg></span><span class="chip chip--planned">planned</span></div><h3>SLA policies</h3><p>Optional response and resolution targets per severity or plan. Timers would start on filing; a target at risk nudges the tool, and a breach pages a person.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bell"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Lifecycle updates</h3><p>Plain-language status updates to the customer as the ticket moves, until it is resolved and confirmed.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bolt"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Rust core</h3><p>The ticketing and routing core is planned in Rust, as one static binary you could self-host.</p></article>
+    <article class="feature"><div class="feature__top"><span class="feature__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-agent"/></svg></span><span class="chip chip--planned">planned</span></div><h3>Agent-ready</h3><p>An MCP server and tool schema, so Claude, GPT or your own agents could search sources, answer and file issues.</p></article>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ escalation pipeline -->
+<section class="sec--tint" id="pipeline" aria-labelledby="pipeline-title">
+  <div class="sec wrap">
+    <p class="eyebrow">HOW AN ESCALATION WOULD HAPPEN <span class="chip chip--planned">planned</span></p>
+    <h2 class="h2 h2--tight" id="pipeline-title">One model writes the ticket. A second one checks it. The customer hears back at every step.</h2>
+    <p class="lede">The design rule: nothing reaches your tools on a single model's say-so. A drafting model would turn the conversation into a structured ticket; an independent judge model would validate it and decide whether, where and with what priority it is filed. From then on, the customer would be kept informed until the issue is closed. The panels show sample output, not a real run.</p>
+    <ol class="pipeline">
+      <li class="stage-card">
+        <div class="stage-card__top"><span class="stage-card__n">01</span><span class="chip chip--acc">CUSTOMER</span></div>
+        <h3>The conversation</h3>
+        <p>Text or voice. The agent would try to answer from your sources first, and ask a clarifying question when it needs one.</p>
+        <pre>"The export button
+ returns a 500 on
+ large CSVs."
+
+retrieval: 0 fixes
+confidence: 0.31
+→ escalate</pre>
+      </li>
+      <li class="stage-card">
+        <div class="stage-card__top"><span class="stage-card__n">02</span><span class="chip chip--acc">DRAFTING LLM</span></div>
+        <h3>Turns the chat into a ticket</h3>
+        <p>It would extract a title, reproduction steps, expected versus actual behaviour, environment and a proposed severity from the transcript.</p>
+        <pre>title: Export returns
+  500 on CSV &gt; 50 MB
+steps: [3 extracted]
+env: Chrome 129, EU
+attachments (approved):
+  stacktrace.txt
+  screen.mp4 0:42
+severity: high
+  (proposed)</pre>
+      </li>
+      <li class="stage-card">
+        <div class="stage-card__top"><span class="stage-card__n">03</span><span class="chip chip--acc">JUDGE LLM</span></div>
+        <h3>Validates before anything is filed</h3>
+        <p>An independent model would score the draft: is it a real defect, is it reproducible, is it a duplicate, is the severity justified, is any customer data leaking?</p>
+        <pre>is_defect:    0.94 ✓
+reproducible: 0.88 ✓
+dup of #311:  0.12 ✗
+severity_ok:  ✓ high
+pii_scrubbed: ✓
+verdict: FILE</pre>
+      </li>
+      <li class="stage-card">
+        <div class="stage-card__top"><span class="stage-card__n">04</span><span class="chip chip--acc">ROUTER</span></div>
+        <h3>Sends it where it belongs</h3>
+        <p>Bugs to GitHub, Jira or Linear. Support cases to Zendesk. Leads to Salesforce. A person on the mobile app when the judge says so.</p>
+        <pre>destination: github
+repo: acme/app
+labels: [bug,
+  severity:high]
+→ acme/app#482 created
+← link posted in chat</pre>
+      </li>
+      <li class="stage-card">
+        <div class="stage-card__top"><span class="stage-card__n">05</span><span class="chip chip--acc">LIFECYCLE</span></div>
+        <h3>Keeps the customer updated</h3>
+        <p>The ticket would stay linked to the conversation. Status changes in your tools would trigger plain-language updates to the customer, in chat or by email, until it is closed.</p>
+        <pre>acme/app#482
+triaged
+ → "An engineer is
+    on it"
+in review
+ → "A fix is being
+    tested"
+released
+ → "Fixed in v2.14.
+    Try the export?"
+closed
+ ← customer confirms</pre>
+      </li>
+    </ol>
+    <ul class="legend" aria-label="Judge outcomes">
+      <li><span class="dot dot--ok"></span>Judge approves → filed to the destination</li>
+      <li><span class="dot dot--warn"></span>Judge unsure → asks the customer one more question</li>
+      <li><span class="dot dot--bad"></span>Duplicate → links to the existing issue, nothing new filed</li>
+    </ul>
+
+    <div class="sla">
+      <div class="sla__copy">
+        <div class="sla__head"><h3>SLA policies</h3><span class="chip">OPTIONAL</span><span class="chip chip--planned">planned</span></div>
+        <p>Response and resolution targets per severity or per plan. The agent would set the timer when it files, nudge the destination when a target is at risk, page the on-call person on breach, and tell the customer what to expect.</p>
+        <ul class="tags">
+          <li>Per severity</li>
+          <li>Per plan / account</li>
+          <li>Business hours aware</li>
+          <li>Synced to Jira / Zendesk SLA fields</li>
+        </ul>
+      </div>
+      <div class="sla__table">
+        <table>
+          <caption>Example policy. It would be editable per workspace.</caption>
+          <thead><tr><th scope="col">SEVERITY</th><th scope="col">FIRST RESPONSE</th><th scope="col">RESOLUTION</th><th scope="col">ON BREACH</th></tr></thead>
+          <tbody>
+            <tr><td class="sev--critical">critical</td><td>15 min</td><td>4 h</td><td>page on-call, notify customer</td></tr>
+            <tr><td class="sev--high">high</td><td>1 h</td><td>1 business day</td><td>page on-call</td></tr>
+            <tr><td class="sev--normal">normal</td><td>4 h</td><td>3 business days</td><td>nudge destination, Slack</td></tr>
+            <tr><td class="sev--low">low</td><td>1 business day</td><td>next release</td><td>weekly digest</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ human in the loop -->
+<section class="sec wrap" id="human" aria-labelledby="human-title">
+  <p class="eyebrow">HUMAN IN THE LOOP <span class="chip chip--planned">planned</span></p>
+  <h2 class="h2 h2--tight" id="human-title">A person could step in at any point, from their phone.</h2>
+  <p class="lede">The agent would handle the conversation. Your team would watch, approve, take over and hand back, from a mobile app or through the API, and every handover would keep the full context.</p>
+  <div class="hitl">
+    <ol class="timeline">
+      <li data-actor="customer">
+        <div class="timeline__rail"><span class="timeline__k">C</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">CUSTOMER</span><h3>Reports a problem</h3></div>
+          <p>By chat, by voice, or inside your mobile app. The agent would answer from your sources where it can.</p>
+          <ul class="tags"><li>Widget</li><li>iOS / Android SDK</li><li>API</li></ul>
+        </div>
+      </li>
+      <li data-actor="ai">
+        <div class="timeline__rail"><span class="timeline__k">AI</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">AI AGENT</span><h3>Handles it, or drafts an escalation</h3></div>
+          <p>Retrieval and an answer with citations, or a structured ticket scored by the judge model.</p>
+          <ul class="tags"><li>Automatic</li></ul>
+        </div>
+      </li>
+      <li data-actor="trigger">
+        <div class="timeline__rail"><span class="timeline__k">!</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">TRIGGER</span><h3>Something asks for a person</h3></div>
+          <p>The judge is unsure, the customer asks for a person, the account is flagged, an SLA is about to breach, or your policy requires approval before anything is filed. The on-call person would be notified.</p>
+          <ul class="tags"><li>Push notification</li><li>Slack</li><li>Webhook</li></ul>
+        </div>
+      </li>
+      <li data-actor="human">
+        <div class="timeline__rail"><span class="timeline__k">H</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">HUMAN</span><h3>Watches, approves or takes over</h3></div>
+          <p>From the phone: read the transcript, edit the draft issue, approve, reject, link a duplicate, or join the chat live, while the agent keeps suggesting replies.</p>
+          <ul class="tags"><li>Mobile app</li><li>API</li></ul>
+        </div>
+      </li>
+      <li data-actor="human">
+        <div class="timeline__rail"><span class="timeline__k">H</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">HUMAN</span><h3>Hands back</h3></div>
+          <p>The conversation returns to the agent, which would own the follow-ups and the lifecycle updates to the customer.</p>
+          <ul class="tags"><li>Mobile app</li><li>API</li></ul>
+        </div>
+      </li>
+      <li data-actor="ai">
+        <div class="timeline__rail"><span class="timeline__k">AI</span></div>
+        <div class="timeline__body">
+          <div class="timeline__head"><span class="timeline__actor">AI AGENT</span><h3>Learns from the correction</h3></div>
+          <p>The person's answer or edit would be stored as a reviewed source, so the next customer with the same question gets it without a handoff.</p>
+          <ul class="tags"><li>Automatic</li></ul>
+        </div>
+      </li>
+    </ol>
+
+    <figure class="phone">
+      <figcaption class="phone__label"><span>MOBILE APP · ON-CALL VIEW</span><span class="chip chip--illus">illustration</span></figcaption>
+      <div class="phone__body">
+        <div class="phone__status"><span><span class="dot dot--ok" style="width:7px;height:7px"></span>Maria K. · on call</span><span class="mono" style="font-size:10px">14:02</span></div>
+        <div class="phone__alert">
+          <div class="phone__meta"><span>NEEDS A HUMAN</span><span>SLA 0:42 left · judge 0.52</span></div>
+          <div class="phone__title">Export returns 500 on large CSV</div>
+          <div class="phone__sub">Customer on Enterprise plan. Draft issue ready. Possible duplicate of #311.</div>
+          <div class="phone__actions"><span>Take over</span><span>Approve</span><span>Link #311</span></div>
+        </div>
+        <div class="phone__chat">
+          <div class="mono" style="font-size:11px;color:var(--mute)">LIVE CHAT · AI SUGGESTS</div>
+          <q>Hi, this is Maria from support. I've seen the 500 on your export. Could you tell me roughly how many rows the file has?</q>
+          <div><span>Send</span><span>Edit</span><span>Hand back to AI</span></div>
+        </div>
+        <div class="phone__foot">The same actions are planned for the API and webhooks</div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ integrations -->
+<section class="sec wrap" id="integrations" aria-labelledby="integrations-title">
+  <p class="eyebrow">INTEGRATIONS</p>
+  <h2 class="h2 h2--tight" id="integrations-title">Escalations land where each team already works.</h2>
+  <p class="lede">None of these connectors exists yet. They are the destinations and surfaces the product is being designed around.</p>
+  <ul class="integrations">
+    <li class="integration"><div class="integration__top"><span class="mark">GH</span><span class="chip chip--planned">planned</span></div><div><h3>GitHub Issues</h3><p>Issues with labels, repro steps and a link back to the chat</p></div><div class="integration__team">ENGINEERING</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">JI</span><span class="chip chip--planned">planned</span></div><div><h3>Jira</h3><p>Bugs and tasks into a project, with priority mapped</p></div><div class="integration__team">ENGINEERING</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">LN</span><span class="chip chip--planned">planned</span></div><div><h3>Linear</h3><p>Issues into a team's triage inbox</p></div><div class="integration__team">ENGINEERING</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">ZD</span><span class="chip chip--planned">planned</span></div><div><h3>Zendesk</h3><p>Tickets with the transcript and customer attached</p></div><div class="integration__team">SUPPORT</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">IC</span><span class="chip chip--planned">planned</span></div><div><h3>Intercom</h3><p>Conversations and human handoff</p></div><div class="integration__team">SUPPORT</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">FD</span><span class="chip chip--planned">planned</span></div><div><h3>Freshdesk</h3><p>Tickets with the transcript attached</p></div><div class="integration__team">SUPPORT</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">SF</span><span class="chip chip--planned">planned</span></div><div><h3>Salesforce</h3><p>Leads and cases with intent and account context</p></div><div class="integration__team">SALES</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">HS</span><span class="chip chip--planned">planned</span></div><div><h3>HubSpot</h3><p>Contacts and deals from qualified chats</p></div><div class="integration__team">SALES</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">SL</span><span class="chip chip--planned">planned</span></div><div><h3>Slack</h3><p>Escalation posts to a channel, claimed with one click</p></div><div class="integration__team">ANY TEAM</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">MB</span><span class="chip chip--planned">planned</span></div><div><h3>Mobile app</h3><p>A person takes over the chat from their phone</p></div><div class="integration__team">HUMAN IN THE LOOP</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">TEL</span><span class="chip chip--planned">planned</span></div><div><h3>Phone line</h3><p>Port your number or get a new one; calls answered by the agent and transcribed into tickets</p></div><div class="integration__team">VOICE</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">WH</span><span class="chip chip--planned">planned</span></div><div><h3>Webhook / API</h3><p>A signed JSON payload per event, or pull over REST</p></div><div class="integration__team">DEVELOPERS</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">iOS</span><span class="chip chip--planned">planned</span></div><div><h3>iOS SDK</h3><p>Native chat and voice in your Swift app, with opt-in stack traces and screen recording</p></div><div class="integration__team">MOBILE</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">AND</span><span class="chip chip--planned">planned</span></div><div><h3>Android SDK</h3><p>Native chat and voice in your Kotlin app, with opt-in stack traces and screen recording</p></div><div class="integration__team">MOBILE</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">MC</span><span class="chip chip--planned">planned</span></div><div><h3>MCP server</h3><p>Answer, search and escalate, exposed as tools to your agents</p></div><div class="integration__team">AGENTS</div></li>
+    <li class="integration"><div class="integration__top"><span class="mark">SG</span><span class="chip chip--planned">planned</span></div><div><h3>Built-in ticketing</h3><p>An open-source Rust core, planned as one self-hostable binary</p></div><div class="integration__team">ANY TEAM</div></li>
+  </ul>
+</section>
+
+<!-- ------------------------------------------------------------ pricing
+     House rule: no price for anything planned. The tiers are the intended
+     shape, without numbers, so no figure can be quoted before launch. -->
+<section class="sec--tint" id="pricing" aria-labelledby="pricing-title">
+  <div class="sec wrap">
+    <div class="pricing__head">
+      <p class="eyebrow">PRICING <span class="chip chip--planned">planned</span></p>
+      <h2 class="h2" id="pricing-title">A free tier, paid tiers by volume, and a core you can run yourself.</h2>
+      <p class="lede">Nothing is for sale and no price is set. These are the tiers being planned, without numbers, so none can be quoted before launch.</p>
+    </div>
+    <ul class="tiers">
+      <li class="tier">
+        <div class="tier__top"><h3>Free</h3><span class="chip chip--planned">planned</span></div>
+        <div class="tier__price">Not set</div>
+        <p class="tier__for">For trying it on a small site.</p>
+        <ul><li>A capped number of conversations</li><li>One source, one destination</li><li>Text only</li></ul>
+      </li>
+      <li class="tier">
+        <div class="tier__top"><h3>Pro</h3><span class="chip chip--planned">planned</span></div>
+        <div class="tier__price">Not set</div>
+        <p class="tier__for">For teams shipping a product.</p>
+        <ul><li>More conversations</li><li>Unlimited sources and destinations</li><li>GitHub issue writing, analytics</li><li>Voice minutes included, then billed per minute</li></ul>
+      </li>
+      <li class="tier">
+        <div class="tier__top"><h3>Scale</h3><span class="chip chip--planned">planned</span></div>
+        <div class="tier__price">Not set</div>
+        <p class="tier__for">For high-volume support.</p>
+        <ul><li>High conversation volume</li><li>SSO, audit log, SLA policies</li><li>More voice minutes included</li></ul>
+      </li>
+      <li class="tier">
+        <div class="tier__top"><h3>Self-hosted</h3><span class="chip chip--planned">planned</span></div>
+        <div class="tier__price">Open source</div>
+        <p class="tier__for">Run the Rust core yourself.</p>
+        <ul><li>MIT licence, intended</li><li>Ticketing, routing and incidents</li><li>A single static binary</li><li>Bring your own model key</li></ul>
+      </li>
+    </ul>
+    <p class="pricing__foot note">Voice, including phone calls, is planned to be billed per minute beyond an included allowance. No figure is set for that either.</p>
+    <p class="pricing__cta"><a class="btn" href="#waitlist">Join the waitlist</a></p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ waitlist
+     The form posts to the Cratefield harness waitlist module at
+     api.supportgeni.us. It stays hidden until data-open="true": until that
+     Worker exists, a visitor sees the mail fallback, not a form that cannot
+     work. See README, "The waitlist". -->
+<section class="end" id="waitlist" aria-labelledby="waitlist-title">
+  <div class="wrap"><div class="cta">
+    <h2 id="waitlist-title">Hear once, when it answers.</h2>
+    <p>Nothing is built yet. Leave your address and you will get one email, when there is something to use.</p>
+    <form class="wait__form" id="waitlist-form" data-open="false" data-endpoint="https://api.supportgeni.us/v1/waitlist" data-product="supportgenius" data-contact="hello@supportgeni.us" data-double-opt-in="false" hidden>
+      <div class="field">
+        <label class="sr-only" for="waitlist-email">Email address</label>
+        <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com">
+        <button class="btn" type="submit">Join the waitlist</button>
+      </div>
+      <p class="hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form__foot">Kept by the <a href="https://cratefield.com">Cratefield</a> waitlist module, in a database of its own. One email, no newsletter.</p>
+    </form>
+    <p data-waitlist-fallback>Email <a href="mailto:hello@supportgeni.us?subject=SupportGenius%20waitlist">hello@supportgeni.us</a> and you will be added by hand.</p>
+    <div class="form__status" id="waitlist-status" role="status" aria-live="polite"></div>
+  </div></div>
+</section>
+
+</main>
+
+<!-- ------------------------------------------------------------ footer -->
+<footer class="foot wrap">
+  <div class="foot__cols">
+    <div class="foot__brand">
+      <a class="brand" href="#top"><span class="logo" aria-hidden="true"><i></i></span><span>Support<b>Genius</b></span></a>
+      <p>supportgeni.us<br>In design. Nothing is built yet.</p>
+    </div>
+    <nav class="foot__col" aria-labelledby="f-page">
+      <h2 id="f-page">ON THIS PAGE</h2>
+      <ul>
+        <li><a href="#how">How it would work</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pipeline">Escalations</a></li>
+        <li><a href="#human">Human in the loop</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-labelledby="f-project">
+      <h2 id="f-project">PROJECT</h2>
+      <ul>
+        <li><a href="https://github.com/SupportGenius">GitHub</a></li>
+        <li><a href="/llms.txt">llms.txt</a></li>
+        <li><a href="#waitlist">Waitlist</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-labelledby="f-contact">
+      <h2 id="f-contact">CONTACT</h2>
+      <ul>
+        <li><a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a></li>
+        <li><a href="/.well-known/security.txt">Security</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="foot__base"><span>© 2026 SupportGenius · a <a href="https://factory0.ventures" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Factory Zero</a> venture</span><span class="mono">No cookies · no analytics</span></div>
+</footer>
+
+<a class="float" href="#waitlist" aria-label="Live demo, planned. Join the waitlist">
+  <span class="float__label">Live demo · planned</span>
+  <span class="float__btn" aria-hidden="true"></span>
+</a>
+
+</body>
+</html>

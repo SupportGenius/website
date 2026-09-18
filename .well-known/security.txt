@@ -1,0 +1,4 @@
+Contact: mailto:security@supportgeni.us
+Expires: 2027-09-18T00:00:00.000Z
+Preferred-Languages: en, nl
+Canonical: https://supportgeni.us/.well-known/security.txt
