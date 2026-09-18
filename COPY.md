@@ -42,6 +42,26 @@ specifications, and no code exists for any of them.
 - The SLA table ("Example policy").
 - The on-call phone view.
 
+## Third-party marks
+
+The hero illustration's destination cards show the **GitHub, Jira, Linear and
+Zendesk** marks, from [Simple Icons](https://simpleicons.org) **16.31.0**
+(`simple-icons-16.31.0.tgz`, sha256 `a70d15e2d53041c01741c988d2989d00f24574565ff8b58c90ddc612056fdd09`,
+CC0-1.0), inlined as `<symbol id="b-…">` in `index.html`. They are drawn in one
+colour (`--ink`): GitHub's and Zendesk's brand colours are near-black and would
+vanish on this background, and single-colour use is within their guidelines
+(github.com/logos, atlassian.design/foundations/logos, brandland.zendesk.com).
+
+**Salesforce is not in Simple Icons**, which dropped it, and Salesforce restricts
+use of its logo. Its card therefore shows a generic cloud glyph (`#i-cloud`, the
+same line-icon style as the feature icons), **not** the Salesforce mark. Do not
+swap in the real logo without Salesforce's permission.
+
+The marks appear only inside the illustration, beside a name, as planned
+destinations. The footer says they are trademarks of their owners and that no
+affiliation or endorsement is implied. Keep that line whenever a mark is on the
+page, and do not add marks to the integrations grid without the same care.
+
 ## Removed from the canvas
 
 | Canvas said | Why it is not on the page |
@@ -49,6 +69,7 @@ specifications, and no code exists for any of them.
 | "Open-source core, written in Rust · Hosted agent" (present tense) | Neither exists. The pill now says both are planned. |
 | "Start free" CTAs | There is nothing to start. They became "Join the waitlist". |
 | A Copy button on the `w.js` embed snippet | `w.js` is not served and there are no keys; copying it would hand someone a snippet that fails. |
+| Two-letter monograms (GH, JI, LN, ZD, SF) on the destination cards | Replaced by the marks above (Salesforce: a generic cloud). |
 | Integration badges "Available" (8) and "Beta" (7) | Nothing is available. All sixteen are `planned`. |
 | Pricing: Free $0, Pro $49, Scale $249, Self-hosted Free, a "Popular" tag, Annual −20%, 500 / 5,000 / 50,000 conversations, 99 / 999 voice minutes, $0.05 per minute | No price for anything planned. The tier shape stays; the numbers and the toggle went. |
 | "sub-millisecond routing, low memory" (Rust core) | A performance claim about code that does not exist. |

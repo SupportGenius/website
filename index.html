@@ -90,6 +90,13 @@
   <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
   <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
   <symbol id="i-agent" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+  <!-- brand marks: Simple Icons 16.31.0 (CC0-1.0), drawn in one colour. Trademarks of their owners; see COPY.md -->
+  <symbol id="b-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="b-jira" viewBox="0 0 24 24"><path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0Z"/></symbol>
+  <symbol id="b-linear" viewBox="0 0 24 24"><path d="M2.886 4.18A11.982 11.982 0 0 1 11.99 0C18.624 0 24 5.376 24 12.009c0 3.64-1.62 6.903-4.18 9.105L2.887 4.18ZM1.817 5.626l16.556 16.556c-.524.33-1.075.62-1.65.866L.951 7.277c.247-.575.537-1.126.866-1.65ZM.322 9.163l14.515 14.515c-.71.172-1.443.282-2.195.322L0 11.358a12 12 0 0 1 .322-2.195Zm-.17 4.862 9.823 9.824a12.02 12.02 0 0 1-9.824-9.824Z"/></symbol>
+  <symbol id="b-zendesk" viewBox="0 0 24 24"><path d="M12.914 2.904V16.29L24 2.905H12.914zM0 2.906C0 5.966 2.483 8.45 5.543 8.45s5.542-2.484 5.543-5.544H0zm11.086 4.807L0 21.096h11.086V7.713zm7.37 7.84c-3.063 0-5.542 2.48-5.542 5.543H24c0-3.06-2.48-5.543-5.543-5.543z"/></symbol>
+  <!-- Salesforce is not in Simple Icons and restricts its logo: a generic cloud, not its mark -->
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
 </svg>
 
 <p class="banner">
@@ -256,35 +263,35 @@
 
         <!-- 03 · destinations: each card lights up in turn (--d) -->
         <div class="dest a-card" style="top:60px">
-          <span class="mark">GH</span>
+          <span class="mark" title="GitHub"><svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#b-github"/></svg></span>
           <div class="dest__txt">
             <div class="a-base"><div class="dest__name">GitHub Issues</div><div class="dest__sub">acme/app</div></div>
             <div class="a-issue"><div class="dest__issue"><b>#482</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--bug">bug</span><span class="lbl lbl--hi">severity:high</span><span class="lbl">repro steps</span></div></div>
           </div>
         </div>
         <div class="dest a-card" style="top:140px;--d:.085">
-          <span class="mark">JI</span>
+          <span class="mark" title="Jira"><svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#b-jira"/></svg></span>
           <div class="dest__txt">
             <div class="a-base"><div class="dest__name">Jira</div><div class="dest__sub">SUP project</div></div>
             <div class="a-issue"><div class="dest__issue"><b>SUP-1042</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--bug">Type: Bug</span><span class="lbl lbl--hi">Priority: High</span><span class="lbl">To Do</span></div></div>
           </div>
         </div>
         <div class="dest a-card" style="top:220px;--d:.165">
-          <span class="mark">LN</span>
+          <span class="mark" title="Linear"><svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#b-linear"/></svg></span>
           <div class="dest__txt">
             <div class="a-base"><div class="dest__name">Linear</div><div class="dest__sub">ENG · Triage</div></div>
             <div class="a-issue"><div class="dest__issue"><b>ENG-318</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--hi">Urgent</span><span class="lbl">Triage</span><span class="lbl">Bug</span></div></div>
           </div>
         </div>
         <div class="dest a-card" style="top:300px;--d:.24">
-          <span class="mark">ZD</span>
+          <span class="mark" title="Zendesk"><svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#b-zendesk"/></svg></span>
           <div class="dest__txt">
             <div class="a-base"><div class="dest__name">Zendesk</div><div class="dest__sub">Tickets · handoff</div></div>
             <div class="a-issue"><div class="dest__issue"><b>#55821</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--hi">Priority: High</span><span class="lbl">Open</span><span class="lbl">Tier 2</span></div></div>
           </div>
         </div>
         <div class="dest a-cardSF" style="top:380px">
-          <span class="mark">SF</span>
+          <span class="mark" title="Salesforce"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cloud"/></svg></span>
           <div class="dest__txt">
             <div class="a-base"><div class="dest__name">Salesforce</div><div class="dest__sub">Leads · Cases</div></div>
             <div class="a-issue"><div class="dest__issue"><b>Lead</b> Acme Corp · 50 seats · volume pricing</div><div class="lbls"><span class="lbl lbl--ok">Hot</span><span class="lbl">Source: Chat</span><span class="lbl">Owner: Sales</span></div></div>
@@ -664,6 +671,7 @@ closed
     </nav>
   </div>
   <div class="foot__base"><span>© 2026 SupportGenius · a <a href="https://factory0.ventures" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Factory Zero</a> venture</span><span class="mono">No cookies · no analytics</span></div>
+  <p class="note foot__tm">GitHub, Jira, Linear, Zendesk and Salesforce are trademarks of their owners, named and shown only as planned destinations. No affiliation or endorsement is implied.</p>
 </footer>
 
 <a class="float" href="#waitlist" aria-label="Live demo, planned. Join the waitlist">

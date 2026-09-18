@@ -392,6 +392,7 @@ code { font-family: var(--mono); }
 .foot__col ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .foot__col a { color: var(--dim); }
 .foot__col a:hover { color: var(--acc); }
+.foot__tm { margin: 16px 0 0; line-height: 1.6; }
 .foot__base {
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .06);
@@ -437,7 +438,7 @@ code { font-family: var(--mono); }
 @media (max-width: 520px)  { .stage { --s: .31; } }
 .demo__caption { text-align: center; margin: 28px 0 0; }
 
-.stage svg { position: absolute; inset: 0; overflow: visible; }
+.stage__canvas > svg { position: absolute; inset: 0; overflow: visible; }
 .stage .flow { animation: dash 1.6s linear infinite; }
 .stage .pkt { filter: drop-shadow(0 0 6px #5b9dff); }
 
@@ -507,7 +508,8 @@ code { font-family: var(--mono); }
   position: absolute; left: 840px; width: 280px; height: 60px; display: flex; align-items: center; gap: 12px; padding: 0 14px;
   border: 1px solid var(--line-2); border-radius: 12px; background: var(--card);
 }
-.dest .mark { font-size: 11px; }
+.dest .mark { font-size: 11px; color: var(--ink); }
+.dest .mark svg { display: block; }
 .dest__txt { position: relative; flex: 1; min-width: 0; height: 36px; }
 .dest__txt > div { position: absolute; inset: 0; }
 .dest__name { font-size: 13px; font-weight: 500; }
