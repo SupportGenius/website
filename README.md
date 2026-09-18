@@ -166,6 +166,17 @@ Use a login or API token for the Factory0 account. Another account's
 
 Claims are tracked in [`COPY.md`](COPY.md).
 
+## Working on an issue
+
+The backlog is written for a [Colonizer](https://colonizer.dev) colony, or any
+agent, to take one issue at a time. Start at the pinned tracking issue,
+[#13](https://github.com/SupportGenius/website/issues/13), which gives the order
+and the rules. In short: touch only the files the issue lists, run
+`python3 tools/check.py` before every commit, open a PR with `Closes #N`, and
+never deploy. A person merges, then runs `tools/deploy.sh`. Labels:
+`colony-ready` (take it), `needs-decision` (ask the one question it names),
+`human-step` / `human-only` (needs account access), `blocked`.
+
 ## Accessibility and motion
 
 Motion is decoration. The hero illustration is `aria-hidden` and described in
