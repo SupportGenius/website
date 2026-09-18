@@ -19,6 +19,10 @@
 /assets/*.svg
   Cache-Control: public, max-age=604800
 
+# PNGs keep their filenames when regenerated, so a week, not immutable.
+/assets/*.png
+  Cache-Control: public, max-age=604800
+
 /llms.txt
   Cache-Control: public, max-age=3600
   Content-Type: text/plain; charset=utf-8
