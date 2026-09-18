@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Source for assets/og.png, assets/readme-banner.png and assets/org-avatar.png.
+     One template, three crops, picked by ?kind=og|banner|avatar.
+     Regenerate all three with tools/render-art.sh.
+
+     Same tokens as assets/supportgenius.css. Nothing here may claim more than the
+     page does: the pill says "In design" and the three routes are the ones the
+     hero lede names, with no sample data. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10; --card: #0f1216; --ink: #e7eaef; --soft: #aeb6c3; --dim: #9aa3b2; --mute: #7b8394;
+    --acc: #5b9dff; --warn: #ffc85c;
+    --line-2: rgba(255, 255, 255, .1); --line-3: rgba(255, 255, 255, .14);
+    --sans: Geist, system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); overflow: hidden; }
+  .art { position: relative; overflow: hidden; color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+  /* The hero's grid and glow, moved right to sit behind the routes. */
+  .glow { position: absolute; inset: 0; background: radial-gradient(45% 65% at 78% 45%, rgba(91, 157, 255, .16), transparent 70%); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(55% 85% at 76% 45%, #000, transparent);
+  }
+  .rule { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, #7fb4ff, #3f7fe6); }
+
+  .content { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; }
+  .brand { display: flex; align-items: center; font-weight: 600; letter-spacing: -.01em; }
+  .brand b { font-weight: 600; color: var(--acc); }
+  .brand svg { flex: none; border-radius: 28%; box-shadow: 0 0 24px rgba(91, 157, 255, .45); }
+  .mid { display: flex; flex-direction: column; justify-content: center; }
+  .pill {
+    align-self: flex-start; display: inline-flex; align-items: center;
+    font-family: var(--mono); color: var(--dim); border: 1px solid var(--line-2); border-radius: 999px;
+  }
+  .pill::before { content: ""; border-radius: 50%; background: var(--warn); flex: none; }
+  h1 { margin: 0; font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+  h1 span { display: block; color: var(--dim); letter-spacing: -.03em; line-height: 1.1; }
+  .bottom { display: flex; justify-content: space-between; font-family: var(--mono); letter-spacing: .08em; color: var(--mute); }
+
+  /* The routes: one engine, three places a question can end up. Drawn at
+     480x380 and scaled per crop. */
+  .stage { position: absolute; width: 480px; height: 380px; transform-origin: top right; }
+  .stage svg.wires { position: absolute; inset: 0; overflow: visible; }
+  .orb { position: absolute; left: 14px; top: 134px; width: 112px; height: 112px; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle, rgba(91, 157, 255, .12), rgba(15, 18, 22, .9) 70%); border: 1px solid var(--line-3); }
+  .orb::before { content: ""; position: absolute; inset: 12px; border-radius: 50%; border: 1px dashed rgba(91, 157, 255, .35); }
+  .orb svg { border-radius: 28%; box-shadow: 0 0 30px rgba(91, 157, 255, .5); }
+  .dest {
+    position: absolute; left: 190px; width: 290px; height: 76px; display: flex; align-items: center; gap: 14px; padding: 0 16px;
+    border: 1px solid var(--line-2); border-radius: 14px; background: var(--card);
+  }
+  .dest__icon { flex: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+    background: rgba(255, 255, 255, .05); border: 1px solid var(--line-2); }
+  .dest__icon svg { width: 20px; height: 20px; }
+  .dest__txt { flex: 1; min-width: 0; }
+  .dest__name { font-size: 17px; font-weight: 500; letter-spacing: -.01em; display: flex; align-items: center; justify-content: space-between; }
+  .dest__sub { font-family: var(--mono); font-size: 12px; white-space: nowrap; color: var(--dim); margin-top: 4px; }
+  .chip { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; font-weight: 400; color: var(--warn);
+    border: 1px solid rgba(255, 200, 92, .45); border-radius: 5px; padding: 1px 6px; }
+
+  /* ---- og: 1200x630 */
+  [data-kind="og"] .art { width: 1200px; height: 630px; }
+  [data-kind="og"] .content { padding: 56px 64px; }
+  [data-kind="og"] .brand { gap: 14px; font-size: 28px; }
+  [data-kind="og"] .mid { max-width: 600px; }
+  [data-kind="og"] .pill { gap: 10px; font-size: 16px; padding: 8px 16px; margin-bottom: 30px; }
+  [data-kind="og"] .pill::before { width: 8px; height: 8px; }
+  [data-kind="og"] h1 { font-size: 76px; }
+  [data-kind="og"] h1 span { font-size: 40px; margin-top: 18px; max-width: 560px; }
+  [data-kind="og"] .bottom { font-size: 15px; }
+  [data-kind="og"] .stage { right: 52px; top: 122px; }
+
+  /* ---- banner: 1280x400, rendered at 2x */
+  [data-kind="banner"] .art { width: 1280px; height: 400px; }
+  [data-kind="banner"] .content { padding: 40px 56px; }
+  [data-kind="banner"] .brand { gap: 12px; font-size: 22px; }
+  [data-kind="banner"] .mid { max-width: 700px; }
+  [data-kind="banner"] .pill { gap: 8px; font-size: 13px; padding: 6px 12px; margin-bottom: 20px; }
+  [data-kind="banner"] .pill::before { width: 7px; height: 7px; }
+  [data-kind="banner"] h1 { font-size: 58px; }
+  [data-kind="banner"] h1 span { font-size: 28px; margin-top: 12px; }
+  [data-kind="banner"] .bottom { font-size: 12px; justify-content: flex-start; gap: 36px; }
+  [data-kind="banner"] .stage { right: 64px; top: 36px; transform: scale(.84); }
+  [data-kind="banner"] .glow { background: radial-gradient(40% 80% at 80% 45%, rgba(91, 157, 255, .16), transparent 70%); }
+
+  /* ---- avatar: 512x512, the mark alone. GitHub rounds org avatars itself. */
+  [data-kind="avatar"] .art { width: 512px; height: 512px; }
+  [data-kind="avatar"] .glow, [data-kind="avatar"] .grid, [data-kind="avatar"] .rule,
+  [data-kind="avatar"] .content, [data-kind="avatar"] .stage { display: none; }
+  .mark-only { display: none; }
+  [data-kind="avatar"] .mark-only { display: block; }
+</style>
+</head>
+<body>
+<!-- The SupportGenius mark, as in assets/favicon.svg. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="sg-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7fb4ff"/>
+      <stop offset="1" stop-color="#3f7fe6"/>
+    </linearGradient>
+  </defs>
+  <symbol id="sg-rings" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="10.2" fill="none" stroke="#0a0c10" stroke-opacity=".6" stroke-width="2" pathLength="64" stroke-dasharray="3 2.33 3 2.33 3 2.33 3 2.33 3 2.33 3 2.33 3 2.33 3 2.33 3 2.33 0 16" transform="rotate(-45 16 16)"/>
+    <circle cx="16" cy="16" r="5.6" fill="none" stroke="#0a0c10" stroke-opacity=".45" stroke-width="2" pathLength="100" stroke-dasharray="75 25" transform="rotate(135 16 16)"/>
+    <circle cx="16" cy="16" r="3" fill="#0a0c10"/>
+  </symbol>
+  <symbol id="sg-mark" viewBox="0 0 32 32">
+    <rect width="32" height="32" rx="9" fill="url(#sg-g)"/>
+    <use href="#sg-rings"/>
+  </symbol>
+  <!-- Lucide 1.47.0 (ISC) and Simple Icons 16.31.0 (CC0-1.0), as on the page -->
+  <symbol id="i-headset" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></g></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g></symbol>
+  <symbol id="b-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+</svg>
+
+<div class="art">
+  <svg class="mark-only" width="512" height="512" viewBox="0 0 32 32" aria-hidden="true">
+    <rect width="32" height="32" fill="url(#sg-g)"/>
+    <g transform="translate(16 16) scale(.8) translate(-16 -16)"><use href="#sg-rings"/></g>
+  </svg>
+
+  <div class="glow"></div>
+  <div class="grid"></div>
+
+  <div class="stage">
+    <svg class="wires" viewBox="0 0 480 380" aria-hidden="true">
+      <g fill="none" stroke="rgba(91,157,255,.5)" stroke-width="1.5">
+        <path d="M126 190 C160 190 158 60 190 60"/>
+        <path d="M126 190 L190 190"/>
+        <path d="M126 190 C160 190 158 320 190 320"/>
+      </g>
+      <g fill="#5b9dff">
+        <circle cx="163" cy="100" r="3"/>
+        <circle cx="158" cy="190" r="3"/>
+        <circle cx="163" cy="280" r="3"/>
+      </g>
+    </svg>
+    <div class="orb"><svg width="46" height="46" aria-hidden="true"><use href="#sg-mark"/></svg></div>
+    <div class="dest" style="top:22px">
+      <span class="dest__icon"><svg aria-hidden="true"><use href="#i-headset"/></svg></span>
+      <div class="dest__txt"><div class="dest__name">Support <span class="chip">planned</span></div><div class="dest__sub">a ticket, with the chat</div></div>
+    </div>
+    <div class="dest" style="top:152px">
+      <span class="dest__icon"><svg aria-hidden="true"><use href="#i-person"/></svg></span>
+      <div class="dest__txt"><div class="dest__name">Sales <span class="chip">planned</span></div><div class="dest__sub">a lead, with the context</div></div>
+    </div>
+    <div class="dest" style="top:282px">
+      <span class="dest__icon"><svg aria-hidden="true"><use href="#b-github"/></svg></span>
+      <div class="dest__txt"><div class="dest__name">Engineering <span class="chip">planned</span></div><div class="dest__sub">a GitHub issue, repro steps</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="brand"><svg class="brand__mark" aria-hidden="true"><use href="#sg-mark"/></svg><span>Support<b>Genius</b></span></div>
+    <div class="mid">
+      <div class="pill">In design · nothing is built yet</div>
+      <h1>Support that answers.<span>When it can't, it routes the issue to the right people.</span></h1>
+    </div>
+    <div class="bottom"><span>A PLANNED AI SUPPORT AGENT</span><span>SUPPORTGENI.US</span></div>
+  </div>
+
+  <div class="rule"></div>
+</div>
+<script>
+  // ?kind=og|banner|avatar picks the crop; og is the default.
+  var kind = new URLSearchParams(location.search).get('kind') || 'og';
+  document.documentElement.setAttribute('data-kind', kind);
+  var size = { og: 40, banner: 32 }[kind] || 0;
+  var mark = document.querySelector('.brand__mark');
+  mark.setAttribute('width', size); mark.setAttribute('height', size);
+</script>
+</body>
+</html>

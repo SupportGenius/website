@@ -33,6 +33,11 @@ specifications, and no code exists for any of them.
 - Pricing shape: free tier, paid tiers by volume, per-minute voice beyond an
   allowance, self-hosted core. No figures.
 
+The sharing card and the GitHub banner (`tools/art.html`, rendered to
+`assets/og.png` and `assets/readme-banner.png`) repeat the hero headline, the
+`In design` pill and the three routes from the hero lede (support ticket, sales
+lead, GitHub issue), each with a `planned` chip. No sample data.
+
 ## Illustrations (sample data, labelled on the page)
 
 - The hero stage: the three conversations, `acme/app#482`, `SUP-1042`,

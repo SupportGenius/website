@@ -161,8 +161,9 @@ else:
 #    Salesforce and Slack tie logo use to a true or listed integration; Apple forbids its
 #    logo. Their cards use line icons until that changes. See COPY.md, "Third-party marks".
 ALLOWED_MARKS = {"github", "jira", "linear", "zendesk", "intercom", "hubspot", "android", "modelcontextprotocol"}
-for mark in sorted(set(re.findall(r'id="b-([a-z0-9]+)"', index_html)) - ALLOWED_MARKS):
-    fail(f"index.html: brand mark b-{mark} is not on the allowlist; read COPY.md, Third-party marks, first")
+for name in ("index.html", "tools/art.html"):
+    for mark in sorted(set(re.findall(r'id="b-([a-z0-9]+)"', (ROOT / name).read_text(encoding="utf-8"))) - ALLOWED_MARKS):
+        fail(f"{name}: brand mark b-{mark} is not on the allowlist; read COPY.md, Third-party marks, first")
 if "b-android" in index_html and "Creative Commons 3.0 Attribution" not in index_html:
     fail("index.html: the Android robot needs its CC BY 3.0 credit")
 
@@ -170,6 +171,19 @@ if "b-android" in index_html and "Creative Commons 3.0 Attribution" not in index
 llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
 if "NOTHING IS BUILT" not in llms and "## Shipping today" not in llms:
     fail("llms.txt: lost the built/unbuilt split")
+
+# 9. The sharing card exists, ships, and is announced as a large image.
+#    readme-banner.png and org-avatar.png are GitHub-only; build-dist.sh drops them.
+for prop in ("og:image", "twitter:image"):
+    m = re.search(r'<meta (?:property|name)="' + prop + r'" content="https://supportgeni\.us/([^"]+)"', index_html)
+    if not m:
+        fail(f"index.html: no {prop} on https://supportgeni.us/")
+    elif not (ROOT / m.group(1)).is_file():
+        fail(f"index.html: {prop} points at /{m.group(1)}, which does not exist; run tools/render-art.sh")
+    elif m.group(1) in ("assets/readme-banner.png", "assets/org-avatar.png"):
+        fail(f"index.html: {prop} points at GitHub-only artwork that build-dist.sh does not ship")
+if '<meta name="twitter:card" content="summary_large_image">' not in index_html:
+    fail("index.html: twitter:card should be summary_large_image, or the card shows as a thumbnail")
 
 for f in failures:
     print("FAIL", f)

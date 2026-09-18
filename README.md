@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="assets/readme-banner.png" alt="SupportGenius. Support that answers. When it can't, it routes the issue to the right people. In design: nothing is built yet." width="100%">
+</p>
+
+<p align="center">
   <b>supportgeni.us</b> · a <a href="https://factory0.ventures">Factory Zero</a> venture
 </p>
 
@@ -71,7 +75,9 @@ and `.well-known/security.txt`.
 ├── assets/
 │   ├── supportgenius.css      the whole design system, tokens at the top
 │   ├── supportgenius.js       demo stage scale, reduced motion for its SVG, the waitlist
-│   └── favicon.svg            the mark, still
+│   ├── favicon.svg            the mark, still
+│   ├── og.png                 the sharing card, rendered from tools/art.html
+│   └── readme-banner.png  org-avatar.png   GitHub-only artwork, never deployed
 ├── llms.txt                   the structured summary for machine readers
 ├── robots.txt                 AI crawlers welcomed by name
 ├── _headers  _redirects       Cloudflare Pages
@@ -79,6 +85,7 @@ and `.well-known/security.txt`.
 └── tools/
     ├── check.py               structure + house-rule checks; deploy.sh runs it
     ├── build-dist.sh          assembles dist/ from an allowlist, stamps cache hashes
+    ├── art.html  render-art.sh   source and renderer for the three PNGs
     └── deploy.sh              deploys origin/main from a clean worktree
 ```
 
@@ -95,6 +102,30 @@ python3 tools/check.py          # before every commit
 `_headers` (including the Content-Security-Policy) only applies on Cloudflare
 Pages. A local server does not send it, so check a change that loads anything
 new on a Pages preview too.
+
+## Sharing card and GitHub artwork
+
+Three PNGs come from one template, `tools/art.html`, cropped by `?kind=`:
+
+| File | Size | Used by | Deployed |
+| :--- | :--- | :--- | :--- |
+| `assets/og.png` | 1200×630 | `og:image` and `twitter:image` on the page | yes |
+| `assets/readme-banner.png` | 2560×800 | this README, and the [org profile](https://github.com/SupportGenius) (`SupportGenius/.github` links here) | no |
+| `assets/org-avatar.png` | 512×512 | the org avatar | no |
+
+```sh
+tools/render-art.sh     # headless Chrome; commit the PNGs with the change
+```
+
+The card says no more than the page: the hero headline, the `In design` pill,
+and the three routes the hero lede names, each chipped `planned`. Re-render it
+whenever the headline, the mark or the colours change. Link previews are
+cached by each platform, so a new card can take days to replace the old one.
+
+GitHub has no API for org avatars. Upload `assets/org-avatar.png` by hand at
+[the org settings](https://github.com/organizations/SupportGenius/settings/profile).
+Keep `assets/readme-banner.png` at this path: the org profile loads it from
+`main`.
 
 ## The demo stage
 
