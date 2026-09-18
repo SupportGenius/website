@@ -44,23 +44,36 @@ specifications, and no code exists for any of them.
 
 ## Third-party marks
 
-The hero illustration's destination cards show the **GitHub, Jira, Linear and
-Zendesk** marks, from [Simple Icons](https://simpleicons.org) **16.31.0**
-(`simple-icons-16.31.0.tgz`, sha256 `a70d15e2d53041c01741c988d2989d00f24574565ff8b58c90ddc612056fdd09`,
-CC0-1.0), inlined as `<symbol id="b-…">` in `index.html`. They are drawn in one
-colour (`--ink`): GitHub's and Zendesk's brand colours are near-black and would
-vanish on this background, and single-colour use is within their guidelines
-(github.com/logos, atlassian.design/foundations/logos, brandland.zendesk.com).
+Each icon tile in the hero illustration and the integrations grid shows either
+the brand's own mark or a generic line icon. The rule: **a brand's logo only
+where its owner allows referring use before an integration exists.** A
+`planned` integration is not a true "integrates with" statement yet.
+`tools/check.py` enforces the allowlist (`ALLOWED_MARKS`).
 
-**Salesforce is not in Simple Icons**, which dropped it, and Salesforce restricts
-use of its logo. Its card therefore shows a generic cloud glyph (`#i-cloud`, the
-same line-icon style as the feature icons), **not** the Salesforce mark. Do not
-swap in the real logo without Salesforce's permission.
+| Card | Icon | Source | Why |
+| :--- | :--- | :--- | :--- |
+| GitHub, Jira, Linear, Zendesk, Intercom, HubSpot | brand mark, one colour | Simple Icons 16.31.0 | Referring use allowed; one colour (`--ink`) because several brand colours vanish on this background |
+| MCP server | Model Context Protocol mark | Simple Icons 16.31.0 | An open protocol's mark |
+| Android SDK | Android robot | Simple Icons 16.31.0 | CC BY 3.0 by Google; **credited in the footer**, which the check requires |
+| Salesforce | generic cloud | Lucide | Its guidelines allow the mark only with wording like "integrates with", "when such statements are true" ([Salesforce trademark guidelines](https://www.salesforce.com/company/legal/tmcusageguidelines/)) |
+| Slack | chat bubbles | Lucide | Only apps listed in the Slack Marketplace may say they integrate or use the logo ([Slack Brand Terms](https://slack.com/terms-of-service/slack-brand)) |
+| iOS SDK | smartphone | Lucide | Apple does not allow third parties to use the Apple logo |
+| Freshdesk | headset | Lucide | No mark in any CC0 set checked |
+| Mobile app, Phone line, Webhook / API | person, phone, webhook | Lucide | Not brands |
+| Built-in ticketing | the SupportGenius mark | ours | |
 
-The marks appear only inside the illustration, beside a name, as planned
-destinations. The footer says they are trademarks of their owners and that no
-affiliation or endorsement is implied. Keep that line whenever a mark is on the
-page, and do not add marks to the integrations grid without the same care.
+Sources, pinned: `simple-icons-16.31.0.tgz` (CC0-1.0, sha256
+`a70d15e2d53041c01741c988d2989d00f24574565ff8b58c90ddc612056fdd09`);
+`lucide-static-1.47.0.tgz` (ISC, sha256
+`b47744c9f7b385c25fb27d212cf9830947030a57a635f8b11a5473a72ec57cfd`). Both are
+inlined as `<symbol>`s in `index.html`: `b-*` for brand marks, `i-*` for line
+icons.
+
+When an integration ships and the brand's terms are met (Salesforce: the
+statement is true; Slack: a Marketplace listing), swap its line icon for the
+mark, add it to `ALLOWED_MARKS`, and update this table. The footer says the
+marks are trademarks of their owners and imply no affiliation; keep that line
+while any mark is on the page.
 
 ## Removed from the canvas
 
@@ -69,7 +82,7 @@ page, and do not add marks to the integrations grid without the same care.
 | "Open-source core, written in Rust · Hosted agent" (present tense) | Neither exists. The pill now says both are planned. |
 | "Start free" CTAs | There is nothing to start. They became "Join the waitlist". |
 | A Copy button on the `w.js` embed snippet | `w.js` is not served and there are no keys; copying it would hand someone a snippet that fails. |
-| Two-letter monograms (GH, JI, LN, ZD, SF) on the destination cards | Replaced by the marks above (Salesforce: a generic cloud). |
+| Two-letter monograms (GH, JI, LN, ZD, SF, IC, FD, HS, SL, …) on every icon tile | Replaced by the icons in "Third-party marks". |
 | Integration badges "Available" (8) and "Beta" (7) | Nothing is available. All sixteen are `planned`. |
 | Pricing: Free $0, Pro $49, Scale $249, Self-hosted Free, a "Popular" tag, Annual −20%, 500 / 5,000 / 50,000 conversations, 99 / 999 voice minutes, $0.05 per minute | No price for anything planned. The tier shape stays; the numbers and the toggle went. |
 | "sub-millisecond routing, low memory" (Rust core) | A performance claim about code that does not exist. |

@@ -161,7 +161,10 @@ Use a login or API token for the Factory0 account. Another account's
    work, a disabled "Live demo" button and footer links that went nowhere. The
    snippet carries a `planned` chip instead, the bubble links to the waitlist,
    and the footer lists only links that resolve.
-7. **No dark patterns.** No fake urgency, no pre-checked boxes, and nothing gated
+7. **Logos only where the brand allows it.** A planned integration is not a
+   true "integrates with". Salesforce, Slack and Apple get line icons until their
+   terms are met; `tools/check.py` holds the allowlist. See `COPY.md`.
+8. **No dark patterns.** No fake urgency, no pre-checked boxes, and nothing gated
    behind an email.
 
 Claims are tracked in [`COPY.md`](COPY.md).

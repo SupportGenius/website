@@ -157,7 +157,16 @@ else:
     if "data-waitlist-fallback" not in index_html:
         fail("index.html: the waitlist mail fallback is missing")
 
-# 7. llms.txt keeps its guard.
+# 7. Brand marks only where the brand allows referring use before an integration exists.
+#    Salesforce and Slack tie logo use to a true or listed integration; Apple forbids its
+#    logo. Their cards use line icons until that changes. See COPY.md, "Third-party marks".
+ALLOWED_MARKS = {"github", "jira", "linear", "zendesk", "intercom", "hubspot", "android", "modelcontextprotocol"}
+for mark in sorted(set(re.findall(r'id="b-([a-z0-9]+)"', index_html)) - ALLOWED_MARKS):
+    fail(f"index.html: brand mark b-{mark} is not on the allowlist; read COPY.md, Third-party marks, first")
+if "b-android" in index_html and "Creative Commons 3.0 Attribution" not in index_html:
+    fail("index.html: the Android robot needs its CC BY 3.0 credit")
+
+# 8. llms.txt keeps its guard.
 llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
 if "NOTHING IS BUILT" not in llms and "## Shipping today" not in llms:
     fail("llms.txt: lost the built/unbuilt split")
