@@ -3,10 +3,6 @@
 </p>
 
 <p align="center">
-  <b>supportgeni.us</b> · a <a href="https://factory0.ventures">Factory Zero</a> venture
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/PRODUCT-NOT%20BUILT-FFC85C?style=flat-square&labelColor=0A0C10" alt="Product: not built">
   <img src="https://img.shields.io/badge/PAGES-1-E7EAEF?style=flat-square&labelColor=0A0C10" alt="Pages: 1">
   <img src="https://img.shields.io/badge/STACK-VANILLA%20JS-E7EAEF?style=flat-square&labelColor=0A0C10" alt="Stack: vanilla JS">
@@ -14,6 +10,10 @@
   <img src="https://img.shields.io/badge/DEPENDENCIES-ZERO-5B9DFF?style=flat-square&labelColor=0A0C10" alt="Dependencies: zero">
   <img src="https://img.shields.io/badge/DEPLOY-CLOUDFLARE%20PAGES-E7EAEF?style=flat-square&labelColor=0A0C10" alt="Deploy: Cloudflare Pages">
   <img src="https://img.shields.io/badge/AGENT%20READABLE-YES-E7EAEF?style=flat-square&labelColor=0A0C10" alt="Agent readable: yes">
+</p>
+
+<p align="center">
+  <b>supportgeni.us</b> · a <a href="https://factory0.ventures">Factory Zero</a> venture
 </p>
 
 ---
@@ -26,6 +26,15 @@ no bundler, no build step and no runtime dependency. It was designed in Claude
 Design (`SupportGenius.dc.html`) and ported to static HTML by hand, the same
 way as [colonizer.dev](https://github.com/Colonizer-dev/website) and
 [findsyou.work](https://github.com/FindsYou-Work/website).
+
+Two things are being described, and the site is careful about which is which.
+The split is the same one the
+[organisation profile](https://github.com/SupportGenius) makes:
+
+| | What it is | Status |
+| :--- | :--- | :--- |
+| **The site** | This repository: supportgeni.us, one page on Cloudflare Pages, MIT. | **Shipping** |
+| **SupportGenius** | The product: the agent, its surfaces and integrations, the escalation pipeline, the Rust core, and the waitlist. | **Planned** |
 
 > **Support that answers.** When it can't, it routes the issue to the right
 > people, where they already work.
@@ -212,3 +221,9 @@ at the sizes it was used; it is `#7b8394` here (5.1:1 on the page background).
 ## Licence
 
 The code in this repository is MIT. The SupportGenius name and mark are not.
+
+---
+
+<p align="center">
+  <sub>No cookies · no analytics · Built by <a href="https://factory0.ventures">Factory Zero</a></sub>
+</p>
