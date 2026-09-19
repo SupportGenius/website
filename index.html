@@ -134,6 +134,7 @@
       <a href="#pipeline">Escalations</a>
       <a href="#integrations">Integrations</a>
       <a href="#pricing">Pricing</a>
+        <a href="#backlog">Backlog</a>
     </div>
     <a class="nav__cta" href="#waitlist">Join the waitlist</a>
   </div>
@@ -636,6 +637,42 @@ closed
      api.supportgeni.us. It stays hidden until data-open="true": until that
      Worker exists, a visitor sees the mail fallback, not a form that cannot
      work. See README, "The waitlist". -->
+<section class="sec wrap" id="backlog" aria-labelledby="backlog-title">
+  <div class="pricing__head">
+    <p class="eyebrow">BACKLOG <span class="chip chip--planned">planned</span></p>
+    <h2 class="h2" id="backlog-title">What is being built, issue by issue.</h2>
+    <p class="lede">Everything above that carries a planned chip is an issue in the open. This list is generated from the trackers, so it is what is actually open rather than a roadmap someone tidied.</p>
+  </div>
+  <div class="backlog">
+    <!-- backlog:start -->
+      <p class="lede">17 open, across the product repositories. This list is generated from the trackers, so it is what is actually open rather than what someone remembered to write down.</p>
+      <p class="backlog__repo">core</p>
+      <ul class="backlog__list">
+        <li><a href="https://github.com/SupportGenius/core/issues/1"><span class="backlog__no">#1</span>Workspace scaffold, and a venture that serves the waitlist</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/2"><span class="backlog__no">#2</span>module-support v0: tenants, API keys, sources and BM25 retrieval</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/3"><span class="backlog__no">#3</span>module-support v1: conversations, answers with citations, and a confidence threshold</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/4"><span class="backlog__no">#4</span>module-escalation v0: intake, then draft, judge, file and notify as outbox stages</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/5"><span class="backlog__no">#5</span>Wire support to escalation, and compose all three modules on the Worker</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/6"><span class="backlog__no">#6</span>bin/supportgenius: the same modules as one static binary</a></li>
+        <li><a href="https://github.com/SupportGenius/core/issues/7"><span class="backlog__no">#7</span>`cratefield-core 0.5` cannot be used: every published companion crate still requires `^0.4`</a></li>
+      </ul>
+      <p class="backlog__repo">site</p>
+      <ul class="backlog__list">
+        <li><a href="https://github.com/SupportGenius/website/issues/2"><span class="backlog__no">#2</span>Waitlist backend: SupportGenius/waitlist-backend on the Cratefield harness</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/3"><span class="backlog__no">#3</span>Privacy notice for the waitlist at /privacy</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/4"><span class="backlog__no">#4</span>Open the waitlist form</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/6"><span class="backlog__no">#6</span>Self-host Geist and Geist Mono; drop the Google Fonts request</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/7"><span class="backlog__no">#7</span>A readable hero illustration on phones</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/8"><span class="backlog__no">#8</span>CI: run tools/check.py on every pull request</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/9"><span class="backlog__no">#9</span>Accessibility pass: axe-core and keyboard</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/10"><span class="backlog__no">#10</span>Design docs at /docs: now or later?</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/12"><span class="backlog__no">#12</span>Live demo from the floating bubble</a></li>
+        <li><a href="https://github.com/SupportGenius/website/issues/13"><span class="backlog__no">#13</span>Backlog: from landing page to open waitlist</a></li>
+      </ul>
+      <!-- backlog:end -->
+  </div>
+</section>
+
 <section class="end" id="waitlist" aria-labelledby="waitlist-title">
   <div class="wrap"><div class="cta">
     <h2 id="waitlist-title">Hear once, when it answers.</h2>
