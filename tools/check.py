@@ -171,6 +171,21 @@ llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
 if "NOTHING IS BUILT" not in llms and "## Shipping today" not in llms:
     fail("llms.txt: lost the built/unbuilt split")
 
+# 9. The sharing card is announced, exists, and ships. Deleting or renaming
+#    assets/og.png otherwise fails silently: every link preview loses its image.
+#    readme-banner.png and org-avatar.png are GitHub-only; build-dist.sh drops them.
+GITHUB_ONLY = ("assets/readme-banner.png", "assets/org-avatar.png")
+for prop in ("og:image", "twitter:image"):
+    m = re.search(r'<meta (?:property|name)="' + prop + r'" content="https://supportgeni\.us/([^"]+)"', index_html)
+    if not m:
+        fail(f"index.html: no {prop} on https://supportgeni.us/; links would unfurl without an image")
+    elif not (ROOT / m.group(1)).is_file():
+        fail(f"index.html: {prop} points at /{m.group(1)}, which does not exist; run tools/render-og.sh")
+    elif m.group(1) in GITHUB_ONLY:
+        fail(f"index.html: {prop} points at GitHub-only artwork that build-dist.sh does not ship")
+if '<meta name="twitter:card" content="summary_large_image">' not in index_html:
+    fail("index.html: twitter:card must be summary_large_image, or the card shrinks to a thumbnail")
+
 for f in failures:
     print("FAIL", f)
 print(f"{len(failures)} failure(s)" if failures else "check: ok")
