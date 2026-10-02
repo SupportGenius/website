@@ -54,6 +54,7 @@ where its owner allows referring use before an integration exists.** A
 | :--- | :--- | :--- | :--- |
 | GitHub, Jira, Linear, Zendesk, Intercom, HubSpot | brand mark, one colour | Simple Icons 16.31.0 | Referring use allowed; one colour (`--ink`) because several brand colours vanish on this background |
 | MCP server | Model Context Protocol mark | Simple Icons 16.31.0 | An open protocol's mark |
+| Living Brain | a ring around one dot, drawn inline | Own drawing, after Living Brain's mark | A sister Factory Zero venture's own mark, no third-party trademark; planned (Livingbrain-wiki/livingbrain#51, SupportGenius/core#64) |
 | Android SDK | Android robot | Simple Icons 16.31.0 | CC BY 3.0 by Google; **credited in the footer**, which the check requires |
 | Salesforce | generic cloud | Lucide | Its guidelines allow the mark only with wording like "integrates with", "when such statements are true" ([Salesforce trademark guidelines](https://www.salesforce.com/company/legal/tmcusageguidelines/)) |
 | Slack | chat bubbles | Lucide | Only apps listed in the Slack Marketplace may say they integrate or use the logo ([Slack Brand Terms](https://slack.com/terms-of-service/slack-brand)) |

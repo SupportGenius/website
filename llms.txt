@@ -44,6 +44,9 @@ page offers an email address instead. Everything below is Planned.
 - Surfaces: a web widget added with one script tag (text and voice), native
   iOS and Android SDKs, a phone line (an existing number or a new one), a REST
   API, and an MCP server so other agents can search, answer and escalate.
+- Living Brain (livingbrain.wiki, a sister Factory Zero venture) as a knowledge and
+  routing source: answers only from pages a team published to customers, with
+  citations, and escalations routed to whoever owns the topic.
 - Escalation pipeline: a drafting model turns the conversation into a
   structured ticket (title, reproduction steps, expected versus actual,
   environment, proposed severity); an independent judge model validates it
