@@ -186,6 +186,14 @@ for prop in ("og:image", "twitter:image"):
 if '<meta name="twitter:card" content="summary_large_image">' not in index_html:
     fail("index.html: twitter:card must be summary_large_image, or the card shrinks to a thumbnail")
 
+# 10. The "Built with" strip is generated from tools/built-with.json, a vendored copy of
+#     this venture's entry in the Factory Zero registry (stack.json). Stale means someone
+#     edited the strip by hand or the data without rerunning tools/built-with.py.
+import subprocess
+bw = subprocess.run([sys.executable, str(ROOT / "tools" / "built-with.py"), "--check"], capture_output=True, text=True)
+if bw.returncode:
+    fail("built-with: " + (bw.stderr or bw.stdout).strip())
+
 for f in failures:
     print("FAIL", f)
 print(f"{len(failures)} failure(s)" if failures else "check: ok")
