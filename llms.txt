@@ -82,6 +82,17 @@ performance data. Do not cite them.
   module (https://cratefield.com), at api.supportgeni.us, with a D1 database of
   its own. Not deployed yet.
 
+## Built with
+
+From the Factory Zero registry (https://factory0.ventures/stack.json), shown
+in the site footer. Only the hosting is in use today; everything else is planned.
+
+- Hosting: Cloudflare (live: the site).
+- Framework: Cratefield (planned; the core is being written on it, nothing is deployed).
+- Payments: Polar as Merchant of Record (planned; nothing is on sale).
+- Security screening: promptdecode, on bug-report free text (planned).
+- Deploys: Keep Shipping (planned).
+
 ## Links
 
 - Source: https://github.com/SupportGenius

@@ -13,6 +13,7 @@ URL that proves it, and change its tense on the page.
 | The site is static HTML, CSS and vanilla JS on Cloudflare Pages | `llms.txt` | This repository; `tools/deploy.sh` |
 | No cookies, no analytics | footer | `index.html` loads `supportgenius.js` and Google Fonts only; `tools/check.py` fails on any other third-party script |
 | A Factory Zero venture | footer, JSON-LD, `llms.txt` | Factory Zero registry record FZ-008 (`Factory-Zero/website`, `assets/fz-data.js`) |
+| "Built with" strip: Cratefield, Polar, promptdecode, Keep Shipping, each **planned**; hosted on Cloudflare (the site, which is live) | footer, `llms.txt` | Factory Zero registry: the `uses` of FZ-008 in `Factory-Zero/website` `assets/fz-data.js`, published as https://factory0.ventures/stack.json and vendored in `tools/built-with.json`. Regenerate with `python3 tools/built-with.py --pull`; `tools/check.py` fails if the strip drifts from the vendored copy. Never edit the strip by hand |
 
 ## Plans (all carry a `planned` chip or sit in a section that does)
 
