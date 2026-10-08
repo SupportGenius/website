@@ -634,21 +634,22 @@ closed
 
 <!-- ------------------------------------------------------------ waitlist
      The form posts to the Cratefield harness waitlist module at
-     api.supportgeni.us. It stays hidden until data-open="true": until that
-     Worker exists, a visitor sees the mail fallback, not a form that cannot
-     work. See README, "The waitlist". -->
+     api.supportgeni.us (SupportGenius/waitlist-backend), with a Cloudflare
+     Turnstile token. It ships hidden; supportgenius.js reveals it. With
+     JavaScript off a visitor sees the mail fallback. See README, "The waitlist". -->
 <section class="end" id="waitlist" aria-labelledby="waitlist-title">
   <div class="wrap"><div class="cta">
     <h2 id="waitlist-title">Hear once, when it answers.</h2>
     <p>Nothing is built yet. Leave your address and you will get one email, when there is something to use.</p>
-    <form class="wait__form" id="waitlist-form" data-open="false" data-endpoint="https://api.supportgeni.us/v1/waitlist" data-product="supportgenius" data-contact="hello@supportgeni.us" data-double-opt-in="false" hidden>
+    <form class="wait__form" id="waitlist-form" data-open="true" data-endpoint="https://api.supportgeni.us/v1/waitlist" data-product="supportgenius" data-contact="hello@supportgeni.us" data-sitekey="0x4AAAAAAFRBObOIEtlONvJt" data-double-opt-in="true" hidden>
       <div class="field">
         <label class="sr-only" for="waitlist-email">Email address</label>
         <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com">
         <button class="btn" type="submit">Join the waitlist</button>
       </div>
+      <div class="wait__human" role="group" aria-label="Human check" hidden data-captcha></div>
       <p class="hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
-      <p class="form__foot">Kept by the <a href="https://cratefield.com">Cratefield</a> waitlist module, in a database of its own. One email, no newsletter.</p>
+      <p class="form__foot">Kept by the <a href="https://cratefield.com">Cratefield</a> waitlist module, in a database of its own. A confirmation link now, then one email when there is something to use. No newsletter.</p>
     </form>
     <p data-waitlist-fallback>Email <a href="mailto:hello@supportgeni.us?subject=SupportGenius%20waitlist">hello@supportgeni.us</a> and you will be added by hand.</p>
     <div class="form__status" id="waitlist-status" role="status" aria-live="polite"></div>

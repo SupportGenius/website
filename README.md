@@ -70,7 +70,7 @@ appears.
 | `#human` | Human in the loop | Six steps from customer to correction, beside the on-call phone view |
 | `#integrations` | Integrations | Sixteen planned destinations and surfaces |
 | `#pricing` | Pricing | The tiers being planned, **without prices** |
-| `#waitlist` | Waitlist | Closed until its Worker exists; a mail address until then |
+| `#waitlist` | Waitlist | Posts to the waitlist Worker at api.supportgeni.us with a Turnstile token; a mail address without JavaScript |
 
 Plus `404.html`, `llms.txt`, `sitemap.xml`, `robots.txt`, `site.webmanifest`
 and `.well-known/security.txt`.
@@ -145,17 +145,25 @@ pauses the SVG packets on the same frame.
 
 ## The waitlist
 
-The form is written, and **closed**. It posts `{ email, product: "supportgenius" }`
+The form is **open**. It posts `{ email, product: "supportgenius", captchaToken }`
 to `https://api.supportgeni.us/v1/waitlist`, a Cloudflare Worker running the
 [Cratefield](https://cratefield.com) harness `waitlist` module with its own D1
-database, to live in `SupportGenius/waitlist-backend`. That Worker does not
-exist yet. Until it does, the form stays hidden (`data-open="false"`) and the
-page offers `hello@supportgeni.us` instead of a control that cannot work.
+database (`SupportGenius/waitlist-backend`). `captchaToken` is a Cloudflare
+Turnstile token from the managed widget (sitekey `0x4AAAAAAFRBObOIEtlONvJt`,
+`action: "waitlist"`), rendered explicitly by `assets/supportgenius.js`. The
+Worker binds the token to the apex hostname `supportgeni.us`, so `www` must
+redirect to the apex (a Cloudflare Redirect Rule on the zone).
 
-To open it: deploy the Worker, confirm `POST /v1/waitlist` returns 202 from
-`https://supportgeni.us` (CORS), set `data-open="true"` on `#waitlist-form`, run
-`tools/check.py`, and deploy. The CSP in `_headers` already allows
-`https://api.supportgeni.us`.
+The Worker sends a double opt-in confirmation link through Owlpost, from
+`no-reply@send.supportgeni.us`, so the form's success copy says to check the
+inbox (`data-double-opt-in="true"`). Answers: `202` joined (also for an address
+already on the list), `400` with problem type `…/captcha-failed` for the human
+check, `400` for a bad address, `429` too many tries. With JavaScript off the
+form stays hidden and the page offers `hello@supportgeni.us` instead.
+
+The CSP in `_headers` allows `https://api.supportgeni.us` (connect-src) and
+`https://challenges.cloudflare.com` (script-src, frame-src). Deploy the Worker
+before the site, or joins fail until it answers.
 
 ## Deploy
 
