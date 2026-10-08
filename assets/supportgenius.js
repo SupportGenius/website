@@ -50,47 +50,51 @@
      data-open="false", a visitor sees the mail fallback instead. */
   (function () {
     var form = document.getElementById('waitlist-form');
-    var status = document.getElementById('waitlist-status');
-    if (!form || !status || !window.fetch) return;
+    var done = document.getElementById('waitlist-done');
+    var err = document.getElementById('waitlist-err');
+    if (!form || !done || !err || !window.fetch) return;
     if (form.getAttribute('data-open') !== 'true') return;
 
     var endpoint = form.getAttribute('data-endpoint');
     var product = form.getAttribute('data-product');
     var contact = form.getAttribute('data-contact');
     var sitekey = form.getAttribute('data-sitekey');
-    var doubleOptIn = form.getAttribute('data-double-opt-in') === 'true';
+    var input = form.elements.email;
     var button = form.querySelector('button[type="submit"]');
+    var label = button.querySelector('[data-label]');
+    var idle = label.textContent;
     var human = form.querySelector('[data-captcha]');
-    var label = button.textContent;
     var TURNSTILE = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=sgTurnstileReady';
     var widget = null;
     var broken = false;
+    var MAIL = 'email ' + contact + ' and you will be added by hand';
 
     form.hidden = false;
     var fallback = document.querySelector('[data-waitlist-fallback]');
     if (fallback) fallback.hidden = true;
 
-    function say(headline, message) {
-      status.textContent = '';
-      var strong = document.createElement('strong');
-      strong.textContent = headline;
-      status.appendChild(strong);
-      status.appendChild(document.createTextNode(' ' + message));
+    function fail(message, onEmail) {
+      err.textContent = message;
+      err.hidden = false;
+      input.setAttribute('aria-invalid', onEmail ? 'true' : 'false');
+      if (onEmail) input.focus();
     }
+    function clear() { err.hidden = true; err.textContent = ''; input.setAttribute('aria-invalid', 'false'); }
+    function busy(on) {
+      button.disabled = on;
+      if (on) button.setAttribute('aria-busy', 'true'); else button.removeAttribute('aria-busy');
+      label.textContent = on ? 'Sending…' : idle;
+    }
+    function reset() { if (window.turnstile && widget !== null) window.turnstile.reset(widget); }
     function joined(email) {
+      done.querySelector('[data-done-email]').textContent = email;
       form.hidden = true;
-      if (doubleOptIn) say('Check your inbox.', 'We sent a confirmation link to ' + email + '. Click it to hold your place.');
-      else say('You’re on the list.', 'We will write to ' + email + ' once, when there is something to use.');
-    }
-    function retry(headline, message) {
-      button.disabled = false;
-      button.textContent = label;
-      if (window.turnstile && widget !== null) window.turnstile.reset(widget);
-      say(headline, message);
+      done.hidden = false;
+      done.focus();
     }
     function unavailable() {
       broken = true;
-      say('The human check did not load.', 'Reload the page, or email ' + contact + ' and you will be added by hand.');
+      fail('The human check did not load, so the form cannot send. Reload the page, or ' + MAIL + '.');
     }
 
     /* Turnstile, rendered explicitly into [data-captcha] once its script loads. */
@@ -116,10 +120,26 @@
       broken = true;
     }
 
+    input.addEventListener('input', function () {
+      if (input.getAttribute('aria-invalid') === 'true') clear();
+    });
+    done.querySelector('[data-again]').addEventListener('click', function () {
+      done.hidden = true;
+      form.hidden = false;
+      clear();
+      if (window.turnstile) render();
+      input.focus();
+      input.select();
+    });
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      var email = (form.elements.email.value || '').trim();
-      if (!email) return;
+      clear();
+      var email = (input.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        fail('That email address doesn’t look right. Check it and try again.', true);
+        return;
+      }
 
       // Honeypot: people leave it empty. A bot that fills it learns nothing.
       if ((form.elements.company.value || '').trim()) { joined(email); return; }
@@ -127,32 +147,32 @@
       if (broken || !window.turnstile || widget === null) { unavailable(); return; }
       var token = window.turnstile.getResponse(widget);
       if (!token) {
-        say('One moment.', 'The human check is still running. Try again in a second.');
+        fail('One more step: the human check is still running. Complete it if it asks, then send again.');
         return;
       }
 
-      button.disabled = true;
-      button.textContent = 'Joining…';
-
+      busy(true);
       fetch(endpoint, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email: email, product: product, captchaToken: token })
       }).then(function (res) {
-        if (res.ok) { joined(email); return; }
+        if (res.ok) { busy(false); joined(email); return; }
         return res.json().catch(function () { return {}; }).then(function (problem) {
           var type = (problem && problem.type) || '';
+          busy(false); reset();
           if (/\/captcha-failed$/.test(type))
-            retry('The human check failed.', 'Try again, or email ' + contact + ' and you will be added by hand.');
+            fail('The human check didn’t go through. It’s been reset — complete it again, then send.');
+          else if (res.status === 429 || /\/rate-limited$/.test(type))
+            fail('Too many tries. Wait a minute, then try again.');
           else if (res.status === 400 || res.status === 422)
-            retry('Not added.', 'That address did not look right. Check it and try again, or email ' + contact + '.');
-          else if (res.status === 429)
-            retry('Too many tries.', 'Wait a moment and try again, or email ' + contact + '.');
+            fail('That email address doesn’t look right. Check it and try again.', true);
           else
-            retry('Could not reach the list.', 'Try again in a moment, or email ' + contact + ' and you will be added by hand.');
+            fail('We couldn’t reach the waitlist just now. Try again in a moment, or ' + MAIL + '.');
         });
       }, function () {
-        retry('Could not reach the list.', 'Try again in a moment, or email ' + contact + ' and you will be added by hand.');
+        busy(false); reset();
+        fail('We couldn’t reach the waitlist just now. Try again in a moment, or ' + MAIL + '.');
       });
     });
   })();

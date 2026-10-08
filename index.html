@@ -644,15 +644,21 @@ closed
     <form class="wait__form" id="waitlist-form" data-open="true" data-endpoint="https://api.supportgeni.us/v1/waitlist" data-product="supportgenius" data-contact="hello@supportgeni.us" data-sitekey="0x4AAAAAAFRBObOIEtlONvJt" data-double-opt-in="true" hidden>
       <div class="field">
         <label class="sr-only" for="waitlist-email">Email address</label>
-        <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com">
-        <button class="btn" type="submit">Join the waitlist</button>
+        <input id="waitlist-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" aria-describedby="waitlist-err">
+        <button class="btn" type="submit"><span class="spin" aria-hidden="true"></span><span data-label>Join the waitlist</span></button>
       </div>
+      <p class="form__err" id="waitlist-err" role="alert" hidden></p>
       <div class="wait__human" role="group" aria-label="Human check" hidden data-captcha></div>
       <p class="hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></p>
       <p class="form__foot">Kept by the <a href="https://cratefield.com">Cratefield</a> waitlist module, in a database of its own. A confirmation link now, then one email when there is something to use. No newsletter.</p>
     </form>
     <p data-waitlist-fallback>Email <a href="mailto:hello@supportgeni.us?subject=SupportGenius%20waitlist">hello@supportgeni.us</a> and you will be added by hand.</p>
-    <div class="form__status" id="waitlist-status" role="status" aria-live="polite"></div>
+    <div class="wait__done" id="waitlist-done" role="status" aria-live="polite" tabindex="-1" hidden>
+      <h3>Check your inbox</h3>
+      <p>We sent a confirmation link to <strong data-done-email></strong>. Click it to hold your place on the SupportGenius waitlist.</p>
+      <p class="wait__small">It can take a minute — check Spam or Promotions if it isn’t there. Already confirmed before? Then you’re already on the list; nothing more to do.</p>
+      <p class="wait__small"><button class="linkbtn" type="button" data-again>Use a different email</button> · Still nothing? Email <a href="mailto:hello@supportgeni.us?subject=SupportGenius%20waitlist">hello@supportgeni.us</a>.</p>
+    </div>
   </div></div>
 </section>
 
