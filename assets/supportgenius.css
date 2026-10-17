@@ -487,6 +487,14 @@ code { font-family: var(--mono); }
 @media (max-width: 520px)  { .stage { --s: .31; } }
 .demo__caption { text-align: center; margin: 28px 0 0; }
 
+/* the film: a 16:9 player in the same card as the other surfaces */
+.film { margin: 0 auto; max-width: 960px; }
+.film video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000;
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+}
+.film__caption { text-align: center; margin: 14px 0 0; }
+
 .stage__canvas > svg { position: absolute; inset: 0; overflow: visible; }
 .stage .flow { animation: dash 1.6s linear infinite; }
 .stage .pkt { filter: drop-shadow(0 0 6px #5b9dff); }
