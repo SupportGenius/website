@@ -39,6 +39,22 @@
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', applyMotion);
   })();
 
+  /* ------------------------------------------------------------ film button
+     The hero's "Watch the film" link scrolls to #film (its href) and starts the
+     video there. Its own scope: it runs whatever the other blocks find. */
+  (function () {
+    var trigger = document.querySelector('[data-play-film]');
+    if (!trigger) return;
+    trigger.addEventListener('click', function () {
+      var video = document.querySelector('#film video');
+      if (!video || typeof video.play !== 'function') return;
+      try {
+        var started = video.play();
+        if (started && typeof started.catch === 'function') started.catch(function () {});
+      } catch (e) { /* the controls still work */ }
+    });
+  })();
+
   /* ------------------------------------------------------------ waitlist
      Posts { email, product, captchaToken } to the waitlist Worker at
      api.supportgeni.us (SupportGenius/waitlist-backend, the Cratefield harness

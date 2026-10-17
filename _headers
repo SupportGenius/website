@@ -19,6 +19,14 @@
 /assets/*.svg
   Cache-Control: public, max-age=604800
 
+# The film: large, rarely changes. A day, not immutable, so a re-cut film is
+# picked up without a URL change.
+/assets/films/*
+  Cache-Control: public, max-age=86400
+
+/assets/films/*.mp4
+  Content-Type: video/mp4
+
 # PNGs keep their filenames when regenerated, so a week, not immutable.
 /assets/*.png
   Cache-Control: public, max-age=604800

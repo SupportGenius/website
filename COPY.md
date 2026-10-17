@@ -14,6 +14,8 @@ URL that proves it, and change its tense on the page.
 | No cookies, no analytics | footer | `index.html` loads `supportgenius.js` and Google Fonts only; `tools/check.py` fails on any other third-party script |
 | A Factory Zero venture | footer, JSON-LD, `llms.txt` | Factory Zero registry record FZ-008 (`Factory-Zero/website`, `assets/fz-data.js`) |
 | "Built with" strip: Cratefield, Polar, promptdecode, Keep Shipping, each **planned**; hosted on Cloudflare (the site, which is live) | footer, `llms.txt` | Factory Zero registry: the `uses` of FZ-008 in `Factory-Zero/website` `assets/fz-data.js`, published as https://factory0.ventures/stack.json and vendored in `tools/built-with.json`. Regenerate with `python3 tools/built-with.py --pull`; `tools/check.py` fails if the strip drifts from the vendored copy. Never edit the strip by hand |
+| "Watch the film · 44 s" hero button, linking to the film section | hero, next to "See the idea" | `index.html`; `assets/films/supportgenius-promo.mp4` is 44.0 s (ffprobe) |
+| A 44-second film of the planned product: every screen an illustration with sample data, nothing built | film section (`#film`), figcaption | `assets/films/supportgenius-promo.mp4`, `assets/films/supportgenius-poster.jpg`. Credits: voice MiniMax speech-2.6-hd (English_ConfidentWoman); music "Digital Clouds" by Alejandro Magaña (A. M.), Mixkit (Mixkit Free License); clips MiniMax Hailuo-2.3, composed in Remotion |
 
 ## Plans (all carry a `planned` chip or sit in a section that does)
 
@@ -42,6 +44,7 @@ specifications, and no code exists for any of them.
   the judge scores.
 - The SLA table ("Example policy").
 - The on-call phone view.
+- The film (`#film`): planned features drawn with sample data; the figcaption says so.
 
 ## Third-party marks
 
