@@ -98,3 +98,4 @@ in the site footer. Only the hosting is in use today; everything else is planned
 - Source: https://github.com/SupportGenius
 - Factory Zero: https://factory0.ventures
 - Cratefield, the backend harness: https://cratefield.com
+- Privacy notice for the waitlist (draft, pending legal review): https://supportgeni.us/privacy
