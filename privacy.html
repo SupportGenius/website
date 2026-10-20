@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · SupportGenius</title>
+<meta name="description" content="What the SupportGenius waitlist stores, who processes it, how long we keep it and how to ask for it to be deleted. Draft, pending legal review.">
+<link rel="canonical" href="https://supportgeni.us/privacy">
+<meta name="theme-color" content="#0a0c10">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/geist-v1.8.1-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/supportgenius.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap nav__in">
+    <a class="brand" href="/" aria-label="SupportGenius, home"><span class="logo" aria-hidden="true"><i></i></span><span>Support<b>Genius</b></span></a>
+    <div class="nav__links">
+      <a href="/">Home</a>
+      <a href="/#waitlist">Waitlist</a>
+    </div>
+    <a class="nav__cta" href="/#waitlist">Join the waitlist</a>
+  </div>
+</nav>
+
+<main id="main" class="wrap legal">
+  <p class="eyebrow"><span class="chip chip--planned">Draft — pending legal review</span></p>
+  <h1>Privacy notice for the waitlist</h1>
+  <p class="note">Last updated 20 October 2026 · SupportGenius is not built yet</p>
+
+  <p>The only thing this site asks you for is your email address, when you join the waitlist. This notice says what happens to it, and what the services that run the site and the waitlist do with your connection. The site sets no cookies of its own and runs no analytics.</p>
+
+  <h2>1. Who is responsible</h2>
+  <p>SupportGenius is a division of Factory Zero Pte. Ltd., Singapore (“we”), which is the controller of the personal data described here. Contact: <a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a>. [Registered address: to be added by the maintainer before this notice is final.]</p>
+
+  <h2>2. What the waitlist stores</h2>
+  <p>Joining the waitlist writes one entry to a database that only the waitlist uses. The entry holds these columns, and no others about you:</p>
+  <ul>
+    <li><code>email</code>: the address you typed.</li>
+    <li><code>email_normalized</code>: the same address in lower case, so one address cannot join twice.</li>
+    <li><code>product</code>: always <code>supportgenius</code>.</li>
+    <li><code>status</code>: <code>pending</code> until you confirm the address, then <code>confirmed</code>.</li>
+    <li><code>position</code>: your place in the queue, set when you confirm.</li>
+    <li><code>referral_code</code>: a random code made for every entry. Referral credit is switched off.</li>
+    <li><code>referred_by</code>, <code>referrals</code>: empty and zero, because referral credit is switched off.</li>
+    <li><code>answers</code>: empty. The sign-up form asks no questions.</li>
+    <li><code>created_at</code>, <code>confirmed_at</code>: when you joined and when you confirmed.</li>
+    <li><code>generation</code>: a number that ties your confirmation link to your entry.</li>
+  </ul>
+  <p>Two more tables hold data about the sign-up, not extra data about you. <code>waitlist_send_cooldown</code> keeps <code>subject</code> (your address and the product, so that we do not mail you more than once an hour) and <code>last_sent_at</code>. <code>waitlist_position_lock</code> keeps one row per product, with a counter for queue positions. We do not ask for your name.</p>
+
+  <h2>3. What leaves us when you join</h2>
+  <ul>
+    <li><strong>The human check.</strong> The form runs Cloudflare Turnstile. It sends your IP address and a token from your browser to Cloudflare to check that a person is joining. Cloudflare may set its own cookies for that check.</li>
+    <li><strong>Rate limiting.</strong> Our Worker counts requests per IP address and per email address with Cloudflare’s Rate Limiting, allowing 10 requests a minute to each, to stop abuse. These counts are not written to the waitlist database.</li>
+    <li><strong>The confirmation email.</strong> Once a mail key is set on the waitlist Worker, we send one confirmation email to your address, from <code>no-reply@send.supportgeni.us</code>. It is sent by Owlpost (<a href="https://owlpost.to">owlpost.to</a>), the mail service Factory Zero runs, or by Resend (<a href="https://resend.com">resend.com</a>) if only a Resend key is set. Until a mail key is set, no email is sent and your entry waits as pending.</li>
+    <li><strong>Launch email.</strong> When SupportGenius has something to use, we email the waitlist once, at the address you gave. Nothing else.</li>
+  </ul>
+
+  <h2>4. Who processes it</h2>
+  <ul>
+    <li><strong>Cloudflare, Inc.</strong>: hosts this site (Cloudflare Pages); runs the waitlist Worker and its D1 database; provides Turnstile and Rate Limiting. The Worker has request logging switched on, so Cloudflare may hold IP addresses in its logs.</li>
+    <li><strong>Owlpost</strong> (Factory Zero): sends the confirmation email, and the launch email when we send it.</li>
+    <li><strong>Resend</strong>: sends the confirmation email only if Owlpost is not set up and a Resend key is.</li>
+  </ul>
+  <p>We do not sell personal data or share it for advertising. No other processor receives the waitlist.</p>
+
+  <h2>5. The site itself</h2>
+  <p>Typefaces are served from this site, so loading a page sends no request to Google or any other font provider. The site loads no analytics and no advertising trackers. Your IP address reaches Cloudflare, which hosts and protects the site, as it does for any site it serves.</p>
+
+  <h2>6. How long we keep it</h2>
+  <ul>
+    <li><strong>Pending entries</strong> (not confirmed) are deleted 30 days after they joined.</li>
+    <li><strong>Confirmed entries</strong> are kept until you ask us to remove you, or until [period after launch: to be set by the maintainer], whichever comes first.</li>
+    <li><strong>Send records</strong> (<code>waitlist_send_cooldown</code>) are removed an hour after they are made.</li>
+    <li><strong>Email delivery records</strong> kept by Owlpost and Cloudflare request logs: [retention periods to be confirmed before launch].</li>
+  </ul>
+
+  <h2>7. Your rights and how to use them</h2>
+  <p>You can ask us for a copy of what we hold about you, ask us to correct it, object to how we use it, or ask us to delete it. For a waitlist entry, you can also withdraw your consent at any time. Write to <a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a> from the address on the list, or tell us the address if you cannot write from it. We can only find an entry by its address.</p>
+  <p>To remove you, we blank the address and answers in your entry and keep the row. That keeps the order of everyone else’s queue position and the referral codes others were given. If you are in the EU or UK, you can also complain to your local data protection authority.</p>
+
+  <h2>8. Legal basis</h2>
+  <p>Joining the waitlist and receiving the confirmation email rely on your consent, given when you confirm the address (Article 6(1)(a) of the GDPR). Rate limiting and the human check rely on our legitimate interest in keeping the waitlist working and free of abuse (Article 6(1)(f)).</p>
+
+  <h2>9. Changes</h2>
+  <p>We will update this notice before anything changes what we collect or who receives it. Until SupportGenius is built, this page is a draft, pending legal review.</p>
+</main>
+
+<footer class="foot wrap">
+  <div class="foot__cols">
+    <div class="foot__brand">
+      <a class="brand" href="/"><span class="logo" aria-hidden="true"><i></i></span><span>Support<b>Genius</b></span></a>
+      <p>supportgeni.us<br>In design. Nothing is built yet.</p>
+    </div>
+    <nav class="foot__col" aria-labelledby="f-page">
+      <h2 id="f-page">ON THIS PAGE</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/#waitlist">Waitlist</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-labelledby="f-project">
+      <h2 id="f-project">PROJECT</h2>
+      <ul>
+        <li><a href="https://github.com/SupportGenius">GitHub</a></li>
+        <li><a href="/llms.txt">llms.txt</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-labelledby="f-contact">
+      <h2 id="f-contact">CONTACT</h2>
+      <ul>
+        <li><a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/.well-known/security.txt">Security</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="foot__base"><span>© 2026 SupportGenius · a <a href="https://factory0.ventures" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Factory Zero</a> venture</span><span class="mono">No cookies · no analytics</span></div>
+</footer>
+</body>
+</html>

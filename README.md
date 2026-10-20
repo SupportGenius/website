@@ -81,8 +81,10 @@ and `.well-known/security.txt`.
 .
 ├── index.html                 the page
 ├── 404.html
+├── privacy.html               the waitlist privacy notice (draft, pending legal review)
 ├── assets/
-│   ├── supportgenius.css      the whole design system, tokens at the top
+│   ├── supportgenius.css      the whole design system, tokens and @font-face at the top
+│   ├── fonts/                 Geist and Geist Mono, Latin woff2 subsets (variable, weights limited), OFL licence
 │   ├── supportgenius.js       demo stage scale, reduced motion for its SVG, the waitlist
 │   ├── favicon.svg            the mark, still
 │   ├── og.png                 Open Graph card (1200×630)

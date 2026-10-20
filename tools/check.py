@@ -20,8 +20,8 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else pathlib.Path(__file__).resolve().parent.parent)
-PAGES = ["index.html", "404.html"]
-ALLOWED_HOSTS = {"supportgeni.us", "fonts.googleapis.com", "fonts.gstatic.com"}  # itself (canonical), and Google Fonts
+PAGES = ["index.html", "404.html", "privacy.html"]
+ALLOWED_HOSTS = {"supportgeni.us"}  # the site itself (canonical links); fonts are self-hosted in assets/fonts/
 
 failures = []
 
@@ -88,12 +88,13 @@ for name in PAGES:
         target = ROOT / path.lstrip("/")
         if path == "/" or path in PENDING_PAGES:
             continue
-        if not target.exists():
+        # Cloudflare Pages serves /privacy from privacy.html (clean URLs).
+        if not target.exists() and not (ROOT / (path.lstrip("/") + ".html")).exists():
             fail(f"{name}: {path} does not exist")
     for tag, url in p.remote:
         host = re.sub(r"^https://([^/]+).*$", r"\1", url)
         if host not in ALLOWED_HOSTS:
-            fail(f"{name}: third-party <{tag}> from {host}; the page loads nothing but Google Fonts")
+            fail(f"{name}: third-party <{tag}> from {host}; the pages load nothing from another host")
     for block in p.jsonld:
         try:
             json.loads(block)
@@ -105,6 +106,13 @@ for name in ["site.webmanifest"]:
         json.loads((ROOT / name).read_text(encoding="utf-8"))
     except ValueError as e:
         fail(f"{name}: does not parse: {e}")
+
+# Every page links to the privacy notice, and so does the waitlist form.
+for name in PAGES:
+    if 'href="/privacy"' not in (ROOT / name).read_text(encoding="utf-8"):
+        fail(f"{name}: no link to /privacy")
+if 'href="/privacy"' not in (ROOT / "index.html").read_text(encoding="utf-8").split('id="waitlist-form"')[1].split("</form>")[0]:
+    fail("index.html: the waitlist form does not link to /privacy")
 
 # ------------------------------------------------------------------ house rules
 index_html = (ROOT / "index.html").read_text(encoding="utf-8")

@@ -6,6 +6,13 @@
    page background and fails WCAG AA for the small mono labels it is used on.
    #7b8394 is 5.1:1 and reads the same. */
 
+/* Typefaces: self-hosted Latin subsets of Geist and Geist Mono (variable
+   fonts, limited to the weights the site uses: Geist 400-600, Geist Mono
+   400-500). SIL Open Font License 1.1; the licence text is beside the files
+   in assets/fonts/. Nothing loads from a third party. */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(/assets/fonts/geist-v1.8.1-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 400 500; font-display: swap; src: url(/assets/fonts/geist-mono-v1.8.1-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 :root {
   --bg: #0a0c10;
   --bg-2: #0d1015;
@@ -754,3 +761,16 @@ code { font-family: var(--mono); }
   }
   .stage .pkt { display: none; }
 }
+
+/* ------------------------------------------------------------------ legal
+   /privacy: a plain reading column. Headings and lists only; no new chrome. */
+.legal { max-width: 760px; padding-top: 64px; padding-bottom: 32px; font-size: 15px; line-height: 1.65; color: var(--soft); }
+.legal h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -.03em; font-weight: 600; line-height: 1.1; margin: 20px 0 12px; color: var(--ink); text-wrap: balance; }
+.legal h2 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; margin: 40px 0 10px; color: var(--ink); }
+.legal p, .legal ul { margin: 0 0 14px; }
+.legal ul { padding-left: 20px; }
+.legal li { margin-bottom: 8px; }
+.legal a { color: var(--acc); text-decoration: underline; text-underline-offset: 3px; }
+.legal code { font-size: 13px; color: var(--code); }
+.legal .note { display: block; margin-bottom: 28px; }
+.legal .eyebrow { margin: 0; }
