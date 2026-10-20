@@ -1,6 +1,6 @@
 # Claims on the page, and what backs them
 
-Nothing is built, so almost every sentence on the page is a **plan**. This file
+Nothing is released, so almost every sentence on the page is a **plan**. This file
 keeps the few facts apart from the plans, and records what was removed from the
 design canvas and why. When a plan ships, move it to "Facts", cite the file or
 URL that proves it, and change its tense on the page.
@@ -9,7 +9,8 @@ URL that proves it, and change its tense on the page.
 
 | Claim | Where | Backed by |
 | :--- | :--- | :--- |
-| Nothing on this page is built yet, except the waitlist | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site and `waitlist-backend` |
+| Nothing on this page is live yet, except the waitlist | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site, `waitlist-backend` and `core` |
+| File ingestion (uploads beyond 48 KiB, PDF text) is built, not released: no part of this product is available to use yet | `llms.txt` "Built, not released"; the page keeps its `planned` chips | `SupportGenius/core#83`, merged 2026-10-20 (`6a0b8a5`) |
 | The waitlist works: the form records an address and sends nothing else | waitlist section, `llms.txt` | `SupportGenius/waitlist-backend`; `curl -s -o /dev/null -w '%{http_code}' https://api.supportgeni.us/__health` returned 200 on 2026-10-20 |
 | The site is static HTML, CSS and vanilla JS on Cloudflare Pages | `llms.txt` | This repository; `tools/deploy.sh` |
 | No cookies, no analytics | footer | `index.html` loads `supportgenius.js` and the self-hosted Geist fonts only; `tools/check.py` fails on any third-party `<script>`, `<link>` or `<img>` |
