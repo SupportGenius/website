@@ -9,7 +9,8 @@ URL that proves it, and change its tense on the page.
 
 | Claim | Where | Backed by |
 | :--- | :--- | :--- |
-| Nothing on this page is built yet | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site |
+| Nothing on this page is built yet, except the waitlist | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site and `waitlist-backend` |
+| The waitlist works: the form records an address and sends nothing else | waitlist section, `llms.txt` | `SupportGenius/waitlist-backend`; `curl -s -o /dev/null -w '%{http_code}' https://api.supportgeni.us/__health` returned 200 on 2026-10-20 |
 | The site is static HTML, CSS and vanilla JS on Cloudflare Pages | `llms.txt` | This repository; `tools/deploy.sh` |
 | No cookies, no analytics | footer | `index.html` loads `supportgenius.js` and Google Fonts only; `tools/check.py` fails on any other third-party script |
 | A Factory Zero venture | footer, JSON-LD, `llms.txt` | Factory Zero registry record FZ-008 (`Factory-Zero/website`, `assets/fz-data.js`) |

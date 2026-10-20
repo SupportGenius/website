@@ -25,6 +25,10 @@ ALLOWED_HOSTS = {"supportgeni.us", "fonts.googleapis.com", "fonts.gstatic.com"} 
 
 failures = []
 
+# Pages that are linked before they exist. Remove an entry when its page lands.
+# /privacy: the waitlist links the privacy notice, which issue #3 adds.
+PENDING_PAGES = {"/privacy"}
+
 
 def fail(msg):
     failures.append(msg)
@@ -82,7 +86,7 @@ for name in PAGES:
             fail(f"{name}: link to #{h}, but no element has that id")
     for path in p.local:
         target = ROOT / path.lstrip("/")
-        if path == "/":
+        if path == "/" or path in PENDING_PAGES:
             continue
         if not target.exists():
             fail(f"{name}: {path} does not exist")
@@ -134,9 +138,9 @@ for cls, closing in (("feature", "</article>"), ("integration", "</li>"), ("tier
 if "illustration" not in index_html.split('id="demo"')[1].split("</figure>")[0]:
     fail("index.html: the hero demo lost its illustration label")
 
-# 5. The banner says nothing is built.
-if "Nothing on this page is built yet" not in index_html:
-    fail("index.html: the not-built banner is missing")
+# 5. The banner says what is built: the waitlist, and nothing else.
+if "The waitlist is the only thing here that works" not in index_html:
+    fail("index.html: the banner no longer says the waitlist is the only thing that works")
 
 # 6. The waitlist form only opens when the CSP allows its endpoint.
 form = re.search(r'<form[^>]*id="waitlist-form"[^>]*>', index_html)

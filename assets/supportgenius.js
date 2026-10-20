@@ -158,7 +158,7 @@
       }
 
       // Honeypot: people leave it empty. A bot that fills it learns nothing.
-      if ((form.elements.company.value || '').trim()) { joined(email); return; }
+      if ((form.elements.company.value || '').trim()) { fail('Nothing was sent: ' + MAIL + '.'); return; }
 
       if (broken || !window.turnstile || widget === null) { unavailable(); return; }
       var token = window.turnstile.getResponse(widget);
@@ -184,11 +184,11 @@
           else if (res.status === 400 || res.status === 422)
             fail('That email address doesn’t look right. Check it and try again.', true);
           else
-            fail('We couldn’t reach the waitlist just now. Try again in a moment, or ' + MAIL + '.');
+            fail('We couldn’t reach the waitlist just now, so nothing was saved. Try again in a moment, or ' + MAIL + '.');
         });
       }, function () {
         busy(false); reset();
-        fail('We couldn’t reach the waitlist just now. Try again in a moment, or ' + MAIL + '.');
+        fail('We couldn’t reach the waitlist just now, so nothing was saved. Try again in a moment, or ' + MAIL + '.');
       });
     });
   })();

@@ -46,7 +46,7 @@ API, no MCP server and no integration. Every capability carries one of two
 labels, and the label sets the tense of the sentence around it.
 
 - **Shipping**: built, deployed, usable now. Present tense is allowed only
-  here. Today that is this page, and nothing else.
+  here. Today that is this page and its waitlist, and nothing else.
 - **Planned**: named, unbuilt. Conditional tense, and a `planned` chip wherever
   it appears on the page.
 
