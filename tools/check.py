@@ -206,6 +206,37 @@ bw = subprocess.run([sys.executable, str(ROOT / "tools" / "built-with.py"), "--c
 if bw.returncode:
     fail("built-with: " + (bw.stderr or bw.stdout).strip())
 
+# 11. The film may come from Cloudflare Stream (assets/films/stream.json, read by
+#     supportgenius.js). The MP4 stays as the fallback, so every listed film needs its MP4,
+#     and the CSP may name only the Stream customer host that the manifest names.
+stream_path = ROOT / "assets" / "films" / "stream.json"
+try:
+    stream = json.loads(stream_path.read_text(encoding="utf-8"))
+except (OSError, ValueError) as e:
+    stream = None
+    fail(f"assets/films/stream.json: does not parse: {e}")
+if stream is not None:
+    origin = stream.get("origin", "")
+    films = stream.get("films", {})
+    if origin and not re.fullmatch(r"https://customer-[a-z0-9]+\.cloudflarestream\.com", origin):
+        fail(f"assets/films/stream.json: origin {origin!r} is not a Stream customer host")
+    for name, film in films.items():
+        if not (ROOT / "assets" / "films" / f"{name}.mp4").is_file():
+            fail(f"assets/films/stream.json: {name} has no MP4 next to it; the MP4 is the fallback")
+        if not re.fullmatch(r"[a-f0-9]{32}", str(film.get("uid", ""))):
+            fail(f"assets/films/stream.json: {name} has no valid Stream uid")
+    if films and not origin:
+        fail("assets/films/stream.json: films are listed but origin is empty")
+    csp = next((line for line in (ROOT / "_headers").read_text(encoding="utf-8").splitlines()
+                if "Content-Security-Policy:" in line), "")
+    if origin:
+        if origin not in csp:
+            fail(f"_headers: CSP does not allow {origin}; run tools/stream-upload.sh")
+        if "*.cloudflarestream.com" in csp:
+            fail("_headers: CSP still has *.cloudflarestream.com; narrow it to the customer host")
+    elif "cloudflarestream.com" not in csp:
+        fail("_headers: CSP does not mention Cloudflare Stream")
+
 for f in failures:
     print("FAIL", f)
 print(f"{len(failures)} failure(s)" if failures else "check: ok")
