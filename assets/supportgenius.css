@@ -518,6 +518,8 @@ code { font-family: var(--mono); }
   .stage__phone .dest { position: relative; left: auto; top: auto; width: 100%; height: auto; min-height: 60px; }
   .stage__phone .dest__txt { height: 40px; }
 }
+/* on the narrowest phones the third destination label would be clipped; the first two carry the meaning */
+@media (max-width: 339px) { .stage__phone .lbls > :last-child { display: none; } }
 
 /* the film: a 16:9 player in the same card as the other surfaces */
 .film { margin: 0 auto; max-width: 960px; }
