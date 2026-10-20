@@ -137,6 +137,12 @@ code { font-family: var(--mono); }
 }
 .logo i { width: 6px; height: 6px; border-radius: 50%; background: var(--bg); animation: logoDot 2s ease-in-out infinite; }
 
+@media (max-width: 380px) {
+  .nav__in { gap: 12px; }
+  .brand { font-size: 15px; gap: 8px; }
+  .nav__cta { font-size: 13px; padding: 8px 10px; }
+}
+
 /* ------------------------------------------------------------------ buttons */
 
 .btn {
@@ -338,6 +344,8 @@ code { font-family: var(--mono); }
 .mark svg { display: block; }
 .integration h3 { font-size: 14px; font-weight: 500; margin: 0; }
 .integration p { font-size: 12.5px; color: var(--dim); margin: 3px 0 0; line-height: 1.45; }
+.integration p a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(231, 234, 239, .45); text-underline-offset: 3px; }
+.integration p a:hover { color: var(--acc); text-decoration-color: var(--acc); }
 .integration__team { font-family: var(--mono); font-size: 10px; color: var(--mute); letter-spacing: .04em; }
 
 /* pricing: the shape of the plan, without numbers */
@@ -486,6 +494,32 @@ code { font-family: var(--mono); }
 @media (max-width: 700px)  { .stage { --s: .45; } }
 @media (max-width: 520px)  { .stage { --s: .31; } }
 .demo__caption { text-align: center; margin: 28px 0 0; }
+
+/* Phones (under 640px): the 1120px canvas is hidden and a stacked version of the same parts
+   shows instead. The widget, channels, engine and destinations reuse the canvas's classes, so
+   they run on the same keyframes. One destination shows at a time: GitHub in scene B, Salesforce
+   in scene C, none in scene A. Every text node here is 11px or larger. */
+.stage__phone { display: none; }
+@media (max-width: 639px) {
+  .stage { height: auto; }
+  .stage__canvas { display: none; }
+  .stage__phone { display: flex; flex-direction: column; gap: 12px; }
+  .sp-label { margin: 6px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--mute); }
+  .sp-label:first-child { margin-top: 0; }
+  .sp-chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; }
+  .sp-chips span { text-align: center; border: 1px solid var(--line-2); border-radius: 6px; padding: 6px 0; color: var(--mute); }
+  .stage__phone .widget { position: relative; left: auto; top: auto; width: 100%; }
+  .stage__phone .a-sceneC .clock { display: none; }
+  .stage__phone .badge, .stage__phone .clock, .stage__phone .cite, .stage__phone .lbl, .stage__phone .input .badge { font-size: 11px; }
+  .sp-engine { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .sp-engine .node { position: relative; width: auto; height: auto; padding: 7px 10px; font-size: 11px; }
+  .sp-dest { display: grid; }
+  .sp-slot { grid-area: 1 / 1; }
+  .stage__phone .dest { position: relative; left: auto; top: auto; width: 100%; height: auto; min-height: 60px; }
+  .stage__phone .dest__txt { height: 40px; }
+}
+/* on the narrowest phones the third destination label would be clipped; the first two carry the meaning */
+@media (max-width: 339px) { .stage__phone .lbls > :last-child { display: none; } }
 
 /* the film: a 16:9 player in the same card as the other surfaces */
 .film { margin: 0 auto; max-width: 960px; }
@@ -691,6 +725,19 @@ code { font-family: var(--mono); }
 @keyframes dash { to { stroke-dashoffset: -24 } }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(91, 157, 255, .5) } 100% { box-shadow: 0 0 0 18px rgba(91, 157, 255, 0) } }
 @keyframes rise { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+
+/* Touch targets: at least 44px tall on phones and touch screens, as WCAG 2.5.5 asks.
+   Mouse layouts are untouched. */
+@media (pointer: coarse), (max-width: 639px) {
+  .skip { min-height: 44px; display: inline-flex; align-items: center; }
+  .nav__cta, .btn, .linkbtn { min-height: 44px; display: inline-flex; align-items: center; }
+  .foot__col a { display: inline-flex; align-items: center; min-height: 44px; }
+  .brand { min-height: 44px; display: inline-flex; align-items: center; }
+  .bw { min-height: 44px; }
+  .field input { height: 48px; }
+}
+/* the human-in-the-loop columns had a 300px minimum, which forced a sideways scroll at 320px */
+@media (max-width: 639px) { .hitl { grid-template-columns: minmax(0, 1fr); } }
 
 /* Reduced motion: everything stops. The demo freezes on one readable frame
    (42% of the loop: the iOS conversation, escalated, with the issue filed)
