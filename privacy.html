@@ -37,7 +37,7 @@
   <p>The only thing this site asks you for is your email address, when you join the waitlist. This notice says what happens to it, and what the services that run the site and the waitlist do with your connection. The site sets no cookies of its own and runs no analytics.</p>
 
   <h2>1. Who is responsible</h2>
-  <p>SupportGenius is a division of Factory Zero Pte. Ltd., Singapore (“we”), which is the controller of the personal data described here. Contact: <a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a>. [Registered address: to be added by the maintainer before this notice is final.]</p>
+  <p>SupportGenius is a division of Factory Zero Pte. Ltd., Singapore (“we”), which is the controller of the personal data described here. Contact: <a href="mailto:hello@supportgeni.us">hello@supportgeni.us</a>. Postal address on request.</p>
 
   <h2>2. What the waitlist stores</h2>
   <p>Joining the waitlist writes one entry to a database that only the waitlist uses. The entry holds these columns, and no others about you:</p>
@@ -76,10 +76,11 @@
 
   <h2>6. How long we keep it</h2>
   <ul>
-    <li><strong>Pending entries</strong> (not confirmed) are deleted 30 days after they joined.</li>
-    <li><strong>Confirmed entries</strong> are kept until you ask us to remove you, or until [period after launch: to be set by the maintainer], whichever comes first.</li>
-    <li><strong>Send records</strong> (<code>waitlist_send_cooldown</code>) are removed an hour after they are made.</li>
-    <li><strong>Email delivery records</strong> kept by Owlpost and Cloudflare request logs: [retention periods to be confirmed before launch].</li>
+    <li><strong>Pending entries</strong> (not confirmed) are deleted 30 days after they last joined.</li>
+    <li><strong>Confirmed entries</strong> are kept until you ask us to remove you, or until 12 months after SupportGenius launches, or until you unsubscribe or ask us to delete them, whichever comes first.</li>
+    <li><strong>Send records</strong> (<code>waitlist_send_cooldown</code>) are deleted by a daily clean-up once they are more than two hours old.</li>
+    <li><strong>Email delivery records</strong> kept by Owlpost: the message and its delivery events are deleted 30 days after sending. A delivery record that holds no address or message content (only a hashed recipient) is kept for a further 30 days. This is Owlpost’s default window; a paid plan can set it up to 365 days.</li>
+    <li><strong>Cloudflare request logs</strong>: kept by Cloudflare for up to 7 days.</li>
   </ul>
 
   <h2>7. Your rights and how to use them</h2>
