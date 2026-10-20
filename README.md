@@ -143,6 +143,14 @@ Under `prefers-reduced-motion` the whole scene freezes on one readable frame
 than collapsing to its invisible end state. CSS cannot reach SMIL, so the script
 pauses the SVG packets on the same frame.
 
+**Under 640px** the canvas is hidden and a stacked version shows instead
+(`.stage__phone`, a sibling of the canvas inside the same `aria-hidden` stage).
+It holds the same widget, channel chips, engine row and destination cards, and
+reuses the canvas's keyframe classes, so it runs on the same 32 s timing. One
+destination shows at a time: GitHub in scene B, Salesforce in scene C, none in
+scene A. Every text node in it is 11px or larger. Edit the two copies together:
+the widget markup appears once in the canvas and once in `.stage__phone`.
+
 ## The waitlist
 
 The form is **open**. It posts `{ email, product: "supportgenius", captchaToken }`
@@ -225,6 +233,56 @@ Motion is decoration. The hero illustration is `aria-hidden` and described in
 prose for screen readers. Under reduced motion every animation stops. Nothing is
 hidden until JavaScript runs. The canvas's `#6b7382` label colour failed WCAG AA
 at the sizes it was used; it is `#7b8394` here (5.1:1 on the page background).
+
+Checks that are not in `tools/check.py`, because they need npm and a headless
+browser (`check.py` stays dependency-free and offline):
+
+- **axe-core.** Serve the repository root (`python3 -m http.server 8000`), then
+  in a scratch folder outside the repo run:
+
+  ```sh
+  mkdir -p ~/sg-a11y && cd ~/sg-a11y && npm i playwright @axe-core/playwright && npx playwright install chromium
+  ```
+
+  Save this as `axe.mjs` in that folder, then run `node axe.mjs http://127.0.0.1:8000`.
+  It scans `index.html` and `404.html` at 1440px and 390px, with and without
+  reduced motion, and exits non-zero on any serious or critical violation.
+
+  ```js
+  import { chromium } from 'playwright';
+  import { AxeBuilder } from '@axe-core/playwright';
+  const base = process.argv[2] || 'http://127.0.0.1:8000';
+  const browser = await chromium.launch();
+  let failures = 0;
+  for (const path of ['/', '/404.html'])
+    for (const width of [1440, 390])
+      for (const reducedMotion of ['no-preference', 'reduce']) {
+        const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion });
+        const page = await context.newPage();
+        await page.goto(base + path, { waitUntil: 'load' });
+        await page.waitForTimeout(1000); // let the hero's entrance fade finish
+        const { violations } = await new AxeBuilder({ page })
+          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+        for (const v of violations.filter((x) => ['serious', 'critical'].includes(x.impact))) {
+          failures += v.nodes.length;
+          console.log(path, width, reducedMotion, v.impact, v.id, v.nodes.map((n) => n.target.join(' ')));
+        }
+        await context.close();
+      }
+  await browser.close();
+  console.log(failures ? `${failures} serious or critical node(s)` : 'axe: 0 serious or critical');
+  process.exitCode = failures ? 1 : 0;
+  ```
+
+- **Keyboard.** Tab from the top reaches "Skip to content" first; Enter moves to
+  `#main`. Every link and button shows a 2px focus ring. Nothing in the
+  `aria-hidden` demo stage can take focus. The page has no menu, popover or
+  modal, so there is nothing for Escape to close. Below 880px the section links
+  are hidden from the nav, and the footer's "On this page" list covers them.
+- **Overflow.** No horizontal page scroll at 320, 360 or 390px. The SLA table
+  scrolls inside its own focusable region.
+- **Touch.** On phones and touch screens (`pointer: coarse`, or under 640px),
+  buttons, nav and footer links, and the built-with pills are at least 44px tall.
 
 ## Licence
 
