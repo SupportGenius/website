@@ -21,7 +21,7 @@ from html.parser import HTMLParser
 
 ROOT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else pathlib.Path(__file__).resolve().parent.parent)
 PAGES = ["index.html", "404.html"]
-ALLOWED_HOSTS = {"supportgeni.us", "fonts.googleapis.com", "fonts.gstatic.com"}  # itself (canonical), and Google Fonts
+ALLOWED_HOSTS = {"supportgeni.us"}  # the site itself (canonical links); fonts are self-hosted in assets/fonts/
 
 failures = []
 
@@ -89,7 +89,7 @@ for name in PAGES:
     for tag, url in p.remote:
         host = re.sub(r"^https://([^/]+).*$", r"\1", url)
         if host not in ALLOWED_HOSTS:
-            fail(f"{name}: third-party <{tag}> from {host}; the page loads nothing but Google Fonts")
+            fail(f"{name}: third-party <{tag}> from {host}; the pages load nothing from another host")
     for block in p.jsonld:
         try:
             json.loads(block)

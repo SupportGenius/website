@@ -1,4 +1,9 @@
 /* Shared by the render sources in tools/: og, banner, avatar. Tokens mirror assets/supportgenius.css. */
+/* Typefaces: the same self-hosted files the site uses (assets/fonts/, SIL OFL 1.1),
+   so renders work offline and send nothing to a third party. block: the screenshot
+   must not be taken before the face arrives. */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400 600; font-display: block; src: url(../assets/fonts/geist-v1.8.1-latin.woff2) format('woff2'); }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 400 500; font-display: block; src: url(../assets/fonts/geist-mono-v1.8.1-latin.woff2) format('woff2'); }
 * { box-sizing: border-box; }
 :root { --bg:#0a0c10; --card:#0f1216; --raised:#171b21; --ink:#e7eaef; --soft:#aeb6c3; --dim:#9aa3b2; --mute:#7b8394; --acc:#5b9dff; --warn:#ffc85c; --ok:#3ddc97; }
 html, body { margin: 0; padding: 0; background: var(--bg); overflow: hidden; }
