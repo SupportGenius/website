@@ -55,6 +55,127 @@
     });
   })();
 
+  /* ------------------------------------------------------------ the film
+     The film is an MP4 in the page. That is what plays with JavaScript off, and
+     what plays if Cloudflare Stream is not used or fails. When
+     assets/films/stream.json lists this film, it plays the adaptive HLS
+     rendition from Cloudflare Stream instead: natively where the browser has HLS
+     (Safari), otherwise through hls.js, loaded from cdnjs on the first play. Nothing
+     streams until the viewer presses play, so the page loads no video bytes.
+     The browser picks a <source> as soon as the video is parsed, so when Stream
+     applies, the video is replaced by a copy without its MP4 children. */
+  (function () {
+    var section = document.getElementById('film');
+    var video = section && section.querySelector('video');
+    if (!video || !window.fetch) return;
+
+    var STREAM_JSON = '/assets/films/stream.json';
+    var HLS_JS = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.6.14/hls.min.js';
+    var HLS_SRI = 'sha384-lbqMj+/seEQo5wSCMdezkKbFWgcv2aq724oyDwaZK0AlpNcwQvWLwBwyA7f5GxiJ';
+    var mp4Sources = [];
+    var localPoster = video.getAttribute('poster');
+    var state = 'pending';   // 'pending' until stream.json is read, then 'stream' or 'mp4'
+    var stream = null;       // { hls, poster } when Stream is in use
+    var attached = false;    // the Stream source has been chosen (it may still fail)
+    var failed = false;
+    var hls = null;
+    var wantPlay = false;
+
+    function pick(data) {
+      var film = data && data.films && data.films[video.getAttribute('data-film')];
+      var origin = data && data.origin;
+      if (!film || !/^[a-f0-9]{32}$/.test(film.uid || '')) return null;
+      if (!/^https:\/\/[a-z0-9-]+\.cloudflarestream\.com$/.test(origin || '')) return null;
+      var time = /^\d+s$/.test(film.poster_time || '') ? film.poster_time : '3s';
+      return {
+        hls: origin + '/' + film.uid + '/manifest/video.m3u8',
+        poster: origin + '/' + film.uid + '/thumbnails/thumbnail.jpg?time=' + time + '&width=960'
+      };
+    }
+
+    var ready = fetch(STREAM_JSON, { cache: 'no-cache' })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(pick)
+      .catch(function () { return null; })
+      .then(function (s) {
+        stream = s;
+        state = s ? 'stream' : 'mp4';
+        if (!s) return;
+        mp4Sources = Array.prototype.slice.call(video.querySelectorAll('source'));
+        var fresh = video.cloneNode(false);   // same attributes, no MP4 children
+        video.parentNode.replaceChild(fresh, video);
+        video = fresh;
+        video.poster = s.poster;
+      });
+
+    function start() {
+      if (!wantPlay) return;
+      wantPlay = false;
+      var p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(function () {});
+    }
+
+    // Any failure of the Stream path returns the film to its MP4 children.
+    function fallback() {
+      if (!attached || failed) return;
+      failed = true;
+      var resume = true;   // attach only follows a play request, so the viewer still wants it
+      if (hls) { hls.destroy(); hls = null; }
+      video.removeEventListener('error', fallback);
+      video.removeAttribute('src');
+      video.poster = localPoster;
+      mp4Sources.forEach(function (x) { video.appendChild(x); });
+      video.load();
+      wantPlay = resume;
+      start();
+    }
+
+    function loadHls() {
+      if (window.Hls) return Promise.resolve(window.Hls);
+      return new Promise(function (resolve, reject) {
+        var tag = document.createElement('script');
+        tag.src = HLS_JS;
+        tag.integrity = HLS_SRI;
+        tag.crossOrigin = 'anonymous';
+        tag.async = true;
+        tag.onload = function () { window.Hls ? resolve(window.Hls) : reject(new Error('hls.js')); };
+        tag.onerror = function () { reject(new Error('hls.js')); };
+        document.head.appendChild(tag);
+      });
+    }
+
+    function attach(s) {
+      attached = true;
+      video.addEventListener('error', fallback);
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = s.hls;
+        start();
+        return;
+      }
+      loadHls().then(function (Hls) {
+        if (!Hls.isSupported()) throw new Error('no media source extensions');
+        hls = new Hls();
+        hls.on(Hls.Events.ERROR, function (_event, data) { if (data.fatal) fallback(); });
+        hls.loadSource(s.hls);
+        hls.attachMedia(video);
+        start();
+      }).catch(fallback);
+    }
+
+    // 'play' does not bubble, but it does pass through the section in the capture phase,
+    // so one listener covers the MP4 element and the Stream copy that replaces it.
+    section.addEventListener('play', function (event) {
+      if (attached || state === 'mp4') return;   // no Stream: the MP4 plays as it always did
+      // The first play waits for stream.json (a few bytes), then starts the right source.
+      event.target.pause();
+      wantPlay = true;
+      ready.then(function () {
+        if (state === 'stream' && !attached) attach(stream);
+        else start();
+      });
+    }, true);
+  })();
+
   /* ------------------------------------------------------------ waitlist
      Posts { email, product, captchaToken } to the waitlist Worker at
      api.supportgeni.us (SupportGenius/waitlist-backend, the Cratefield harness
