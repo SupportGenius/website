@@ -1,0 +1,41 @@
+name: check
+
+# Runs tools/check.py on every pull request and on every push to main, so a bad
+# change is blocked before merge. Deploys are not run from CI: tools/deploy.sh
+# is the only deploy path, and this repository holds no Cloudflare secrets.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Check the site
+        run: python3 tools/check.py
+
+      - name: Syntax-check the shell tools
+        run: bash -n tools/*.sh
+
+      - name: Assemble dist
+        run: ./tools/build-dist.sh

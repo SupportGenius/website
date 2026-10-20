@@ -3,9 +3,9 @@
 > SupportGenius is a planned AI customer-support agent. It would answer from a
 > company's docs, tickets and files, by text or voice, and turn what it cannot
 > answer into a ticket for support, a lead for sales, or a GitHub issue with
-> reproduction steps for engineering. NOTHING IS BUILT. There is no agent, no
+> reproduction steps for engineering. NOTHING ELSE IS BUILT. There is no agent, no
 > widget, no SDK, no phone line, no API, no MCP server and no integration. What
-> exists today is this landing page. This file keeps built and unbuilt apart so
+> exists today is this landing page and its waitlist. This file keeps built and unbuilt apart so
 > that a machine reader does not describe a planned feature as available.
 
 Site: https://supportgeni.us/
@@ -32,9 +32,12 @@ something that exists.
 
 - This landing page. Static HTML, one stylesheet, one script, no build step,
   served by Cloudflare Pages.
+- The waitlist. The form posts to a Cloudflare Worker at api.supportgeni.us
+  (the Cratefield harness `waitlist` module, with its own D1 database). It
+  records an address and nothing else. Without JavaScript the page offers an
+  email address instead.
 
-That is the whole list. The waitlist form is not open yet; until it is, the
-page offers an email address instead. Everything below is Planned.
+That is the whole list. Everything below is Planned.
 
 ## Planned
 
@@ -78,9 +81,9 @@ performance data. Do not cite them.
 - Site: hand-written HTML, CSS and vanilla JavaScript. No framework, no
   bundler, no build step, no runtime dependency. Cloudflare Pages.
 - Designed in Claude Design and ported to static HTML by hand.
-- Planned waitlist: a Cloudflare Worker on the Cratefield harness `waitlist`
-  module (https://cratefield.com), at api.supportgeni.us, with a D1 database of
-  its own. Not deployed yet.
+- Waitlist: a Cloudflare Worker on the Cratefield harness `waitlist` module
+  (https://cratefield.com), at api.supportgeni.us, with a D1 database of its
+  own. Deployed.
 
 ## Built with
 

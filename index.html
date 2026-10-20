@@ -118,8 +118,8 @@
 </svg>
 
 <p class="banner">
-  <strong>In design. Nothing on this page is built yet</strong>: no agent, no widget, no SDK, no integrations.
-  Everything below is a plan, marked <span class="chip chip--planned">planned</span>.
+  <strong>In design. The waitlist is the only thing here that works</strong>: no agent, no widget, no SDK, no integrations.
+  Everything else below is a plan, marked <span class="chip chip--planned">planned</span>.
   <a href="#waitlist">Hear when it ships</a>.
 </p>
 
@@ -329,6 +329,74 @@
         <div class="cv-label" style="left:470px;top:0;width:180px;text-align:center">02 · ENGINE</div>
         <div class="cv-label" style="left:840px;top:0;width:280px;text-align:right">03 · WHERE YOUR TEAM WORKS</div>
       </div>
+        <!-- Under 640px the canvas above is hidden and this stacked version shows instead:
+             the same widget, channels, engine and destinations, on the same keyframes. -->
+        <div class="stage__phone">
+          <p class="sp-label">01 · CUSTOMER · ANY CHANNEL</p>
+          <div class="sp-chips"><span class="a-chipA">WEB</span><span class="a-chipB">MOBILE APP</span><span class="a-chipC">PHONE</span><span>API</span></div>
+        <div class="widget">
+          <div class="widget__head">
+            <div class="a-sceneA"><span class="live"></span><b>SupportGenius</b><span class="badge">WEB WIDGET</span></div>
+            <div class="a-sceneB"><span class="clock">9:41</span><b style="margin-left:6px">Acme · Help</b><span class="badge">iOS SDK</span></div>
+            <div class="a-sceneC"><span class="live"></span><b>+1 (415) 555-0134</b><span class="clock">00:42</span><span class="badge">PHONE LINE</span></div>
+          </div>
+          <div class="widget__body">
+            <div class="bub-me a-msgA">How do I change my billing address?</div>
+            <div class="bub-me a-msgB">The export button returns a 500 on large CSVs.</div>
+            <div class="typing a-typA"><i></i><i></i><i></i></div>
+            <div class="typing a-typB"><i></i><i></i><i></i></div>
+            <div class="bub-ai a-repA">
+              <div>Go to Settings › Billing › Payment details and edit the address. It applies from your next invoice.</div>
+              <div class="cite">Billing docs › Changing your plan</div>
+            </div>
+            <div class="bub-ai a-repB">
+              <div>No fix in the docs, so I've filed this with your engineers, with the steps and the stack trace you approved. You'll get an email when it's resolved.</div>
+              <div class="cite">Escalated · severity high</div>
+            </div>
+            <div class="bub-me a-msgC">Do you offer volume pricing for 50 seats?</div>
+            <div class="typing a-typC"><i></i><i></i><i></i></div>
+            <div class="bub-ai a-repC">
+              <div>Yes, volume pricing starts at 25 seats. I've passed your details to sales; someone will reach out today.</div>
+              <div class="cite">Pricing docs › Volume plans</div>
+            </div>
+          </div>
+          <div class="widget__foot">
+            <div class="a-sceneA"><div class="input">Type or speak…</div><span class="mic"></span></div>
+            <div class="a-sceneB"><div class="input" style="justify-content:space-between">Message…<span class="badge" style="margin-left:0">SEND LOGS?</span></div><span class="mic"></span></div>
+            <div class="a-sceneC"><div class="input"><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="wave"></span><span class="listening">Listening…</span></div><span class="hang"></span></div>
+          </div>
+        </div>
+
+          <p class="sp-label">02 · ENGINE</p>
+          <div class="sp-engine">
+            <span class="node a-nodeABC">LLM</span>
+            <span class="node a-nodeAC">Docs</span>
+            <span class="node a-nodeA">Help center</span>
+            <span class="node a-nodeB">Past tickets</span>
+            <span class="node a-nodeB">Files</span>
+          </div>
+          <p class="sp-label">03 · WHERE YOUR TEAM WORKS</p>
+          <div class="sp-dest">
+            <div class="sp-slot a-sceneB">
+            <div class="dest a-card">
+              <span class="mark" title="GitHub"><svg width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#b-github"/></svg></span>
+              <div class="dest__txt">
+                <div class="a-base"><div class="dest__name">GitHub Issues</div><div class="dest__sub">acme/app</div></div>
+                <div class="a-issue"><div class="dest__issue"><b>#482</b> Export returns 500 on large CSV</div><div class="lbls"><span class="lbl lbl--bug">bug</span><span class="lbl lbl--hi">severity:high</span><span class="lbl">repro steps</span></div></div>
+              </div>
+            </div>
+            </div>
+            <div class="sp-slot a-sceneC">
+            <div class="dest a-cardSF" style="top:380px">
+              <span class="mark" title="Salesforce"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cloud"/></svg></span>
+              <div class="dest__txt">
+                <div class="a-base"><div class="dest__name">Salesforce</div><div class="dest__sub">Leads · Cases</div></div>
+                <div class="a-issue"><div class="dest__issue"><b>Lead</b> Acme Corp · 50 seats · volume pricing</div><div class="lbls"><span class="lbl lbl--ok">Hot</span><span class="lbl">Source: Chat</span><span class="lbl">Owner: Sales</span></div></div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
     </div>
     <figcaption class="demo__caption note" id="demo-caption">Illustration with sample data. Nothing here is connected to a product, because there is no product yet.</figcaption>
   </figure>
@@ -484,7 +552,7 @@ closed
           <li>Synced to Jira / Zendesk SLA fields</li>
         </ul>
       </div>
-      <div class="sla__table">
+      <div class="sla__table" role="region" tabindex="0" aria-label="Example SLA policy">
         <table>
           <caption>Example policy. It would be editable per workspace.</caption>
           <thead><tr><th scope="col">SEVERITY</th><th scope="col">FIRST RESPONSE</th><th scope="col">RESOLUTION</th><th scope="col">ON BREACH</th></tr></thead>
@@ -653,7 +721,7 @@ closed
 <section class="end" id="waitlist" aria-labelledby="waitlist-title">
   <div class="wrap"><div class="cta">
     <h2 id="waitlist-title">Hear once, when it answers.</h2>
-    <p>Nothing is built yet. Leave your address and you will get one email, when there is something to use.</p>
+    <p>The waitlist is the only thing here that works. Leave your address and you will get one email, when there is something to use.</p>
     <form class="wait__form" id="waitlist-form" data-open="true" data-endpoint="https://api.supportgeni.us/v1/waitlist" data-product="supportgenius" data-contact="hello@supportgeni.us" data-sitekey="0x4AAAAAAFRBObOIEtlONvJt" data-double-opt-in="true" hidden>
       <div class="field">
         <label class="sr-only" for="waitlist-email">Email address</label>
@@ -682,7 +750,7 @@ closed
   <div class="foot__cols">
     <div class="foot__brand">
       <a class="brand" href="#top"><span class="logo" aria-hidden="true"><i></i></span><span>Support<b>Genius</b></span></a>
-      <p>supportgeni.us<br>In design. Nothing is built yet.</p>
+      <p>supportgeni.us<br>In design. The waitlist is the only thing here that works.</p>
     </div>
     <nav class="foot__col" aria-labelledby="f-page">
       <h2 id="f-page">ON THIS PAGE</h2>

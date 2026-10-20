@@ -9,7 +9,8 @@ URL that proves it, and change its tense on the page.
 
 | Claim | Where | Backed by |
 | :--- | :--- | :--- |
-| Nothing on this page is built yet | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site |
+| Nothing on this page is built yet, except the waitlist | banner, hero pill, footer, `llms.txt` | There is no product repository in `github.com/SupportGenius` other than this site and `waitlist-backend` |
+| The waitlist works: the form records an address and sends nothing else | waitlist section, `llms.txt` | `SupportGenius/waitlist-backend`; `curl -s -o /dev/null -w '%{http_code}' https://api.supportgeni.us/__health` returned 200 on 2026-10-20 |
 | The site is static HTML, CSS and vanilla JS on Cloudflare Pages | `llms.txt` | This repository; `tools/deploy.sh` |
 | No cookies, no analytics | footer | `index.html` loads `supportgenius.js` and the self-hosted Geist fonts only; `tools/check.py` fails on any third-party `<script>`, `<link>` or `<img>` |
 | Waitlist stores the columns listed on `/privacy`, and nothing else about the person | `privacy.html` section 2 | `SupportGenius/waitlist-backend` `migrations/` and the harness `cratefield-module-waitlist` 0.4.4 it locks (`migrations/sqlite/`, `handlers.rs`): `waitlist_entries`, `waitlist_send_cooldown`, `waitlist_position_lock` |
