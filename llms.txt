@@ -3,10 +3,12 @@
 > SupportGenius is a planned AI customer-support agent. It would answer from a
 > company's docs, tickets and files, by text or voice, and turn what it cannot
 > answer into a ticket for support, a lead for sales, or a GitHub issue with
-> reproduction steps for engineering. NOTHING ELSE IS BUILT. There is no agent, no
+> reproduction steps for engineering. NOTHING ELSE IS LIVE. There is no agent, no
 > widget, no SDK, no phone line, no API, no MCP server and no integration. What
-> exists today is this landing page and its waitlist. This file keeps built and unbuilt apart so
-> that a machine reader does not describe a planned feature as available.
+> is live today is this landing page and its waitlist. One part of the product,
+> file ingestion, is built but not released (see "Built, not released"). This file
+> keeps built, unreleased and unbuilt apart so that a machine reader does not
+> describe a planned feature as available.
 
 Site: https://supportgeni.us/
 Organization: https://github.com/SupportGenius
@@ -37,7 +39,15 @@ something that exists.
   records an address and nothing else. Without JavaScript the page offers an
   email address instead.
 
-That is the whole list. Everything below is Planned.
+That is the whole list. Everything below is Planned, except the item under
+"Built, not released".
+
+## Built, not released
+
+- File ingestion: uploads beyond 48 KiB (chunked, up to 4 MiB per document) and
+  text extraction from PDFs, with content sniffing and decompression limits.
+  Built in SupportGenius/core#83, merged 2026-10-20. No part of this product is
+  available to use yet.
 
 ## Planned
 
