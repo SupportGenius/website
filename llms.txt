@@ -3,10 +3,13 @@
 > SupportGenius is a planned AI customer-support agent. It would answer from a
 > company's docs, tickets and files, by text or voice, and turn what it cannot
 > answer into a ticket for support, a lead for sales, or a GitHub issue with
-> reproduction steps for engineering. NOTHING ELSE IS LIVE. There is no agent, no
-> widget, no SDK, no phone line, no API, no MCP server and no integration. What
-> is live today is this landing page and its waitlist. One part of the product,
-> file ingestion, is built but not released (see "Built, not released"). This file
+> reproduction steps for engineering. NOTHING ELSE IS HOSTED. The core is public at
+> https://github.com/SupportGenius/core, where the escalation pipeline, the GitHub
+> and webhook destinations, the widget (sg_pub_ keys), an MCP server, human takeover
+> and analytics are built. None of it is hosted for customers: there is no agent on
+> supportgeni.us, no w.js, no keys, no phone line and no integration to sign up for.
+> What is live today is this landing page and its waitlist. File ingestion is built
+> but not released (see "Built, not released"). This file
 > keeps built, unreleased and unbuilt apart so that a machine reader does not
 > describe a planned feature as available.
 
@@ -101,7 +104,7 @@ From the Factory Zero registry (https://factory0.ventures/stack.json), shown
 in the site footer. Only the hosting is in use today; everything else is planned.
 
 - Hosting: Cloudflare (live: the site).
-- Framework: Cratefield (planned; the core is being written on it, nothing is deployed).
+- Framework: Cratefield (used by the SupportGenius core; nothing is hosted).
 - Payments: Polar as Merchant of Record (planned; nothing is on sale).
 - Security screening: promptdecode, on bug-report free text (planned).
 - Deploys: Keep Shipping (planned).

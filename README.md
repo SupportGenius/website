@@ -41,8 +41,7 @@ The split is the same one the
 
 ## The rule this site is built around
 
-**Nothing is built.** There is no agent, no widget, no SDK, no phone line, no
-API, no MCP server and no integration. Every capability carries one of two
+**Nothing is hosted.** The core is public in SupportGenius/core, but there is no agent, no hosted widget, no SDK, no phone line, no API and no integration. Every capability carries one of two
 labels, and the label sets the tense of the sentence around it.
 
 - **Shipping**: built, deployed, usable now. Present tense is allowed only
