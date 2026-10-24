@@ -89,7 +89,7 @@ while any mark is on the page.
 
 | Canvas said | Why it is not on the page |
 | :--- | :--- |
-| "Open-source core, written in Rust · Hosted agent" (present tense) | Neither exists. The pill now says both are planned. |
+| "Open-source core, written in Rust · Hosted agent" (present tense) | The core exists in SupportGenius/core but is not hosted. The pill now says the core is public and not hosted, and the hosted agent is planned. |
 | "Start free" CTAs | There is nothing to start. They became "Join the waitlist". |
 | A Copy button on the `w.js` embed snippet | `w.js` is not served and there are no keys; copying it would hand someone a snippet that fails. |
 | Two-letter monograms (GH, JI, LN, ZD, SF, IC, FD, HS, SL, …) on every icon tile | Replaced by the icons in "Third-party marks". |
