@@ -236,14 +236,14 @@ prose for screen readers. Under reduced motion every animation stops. Nothing is
 hidden until JavaScript runs. The canvas's `#6b7382` label colour failed WCAG AA
 at the sizes it was used; it is `#7b8394` here (5.1:1 on the page background).
 
-Checks that are not in `tools/check.py`, because they need npm and a headless
+Checks that are not in `tools/check.py`, because they need bun and a headless
 browser (`check.py` stays dependency-free and offline):
 
 - **axe-core.** Serve the repository root (`python3 -m http.server 8000`), then
   in a scratch folder outside the repo run:
 
   ```sh
-  mkdir -p ~/sg-a11y && cd ~/sg-a11y && npm i playwright @axe-core/playwright && npx playwright install chromium
+  mkdir -p ~/sg-a11y && cd ~/sg-a11y && bun init -y && bun add playwright @axe-core/playwright && bunx playwright install chromium
   ```
 
   Save this as `axe.mjs` in that folder, then run `node axe.mjs http://127.0.0.1:8000`.

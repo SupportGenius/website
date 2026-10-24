@@ -53,7 +53,7 @@ if [ "$dry_run" = 1 ]; then
   exit 0
 fi
 
-npx --yes wrangler@4 pages deploy "$tmp/tree/dist" \
+bunx wrangler@4 pages deploy "$tmp/tree/dist" \
   --project-name=supportgenius \
   --branch=main \
   --commit-hash="$sha" \
